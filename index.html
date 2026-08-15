@@ -1,531 +1,517 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Landing Page SPA - DOM Manipulation</title>
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              50: '#eef2ff',
-              100: '#e0e7ff',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-            }
-          }
-        }
-      }
-    }
-  </script>
-
-  <!-- Google Fonts: Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome Icons CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evene — Platform Event & Relawan Komunitas</title>
+    <meta name="description" content="Temukan event sosial, daftar jadi relawan, dan buat dampak nyata bersama komunitas di sekitarmu.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 font-['Plus_Jakarta_Sans'] transition-colors duration-300 antialiased min-h-screen flex flex-col justify-between">
-
-  <!-- ================= NAVBAR ================= -->
-  <header id="navbar" class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16 sm:h-20">
-        
-        <!-- Logo -->
-        <a href="#home" class="nav-link flex items-center gap-2 text-xl font-bold text-slate-900 dark:text-white group" data-page="home">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-400 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
-            <i class="fa-solid fa-layer-group"></i>
-          </div>
-          <span>Tech<span class="text-brand-600 dark:text-indigo-400">Flow</span></span>
-        </a>
-
-        <!-- Desktop Navigation Menu -->
-        <nav class="hidden md:flex items-center gap-1 bg-slate-100 dark:bg-slate-800/60 p-1.5 rounded-full border border-slate-200/60 dark:border-slate-700/60 shadow-inner">
-          <button class="nav-btn px-5 py-2 text-sm font-medium rounded-full transition-all duration-200" data-page="home">
-            <i class="fa-solid fa-house mr-1.5 text-xs"></i> Home
-          </button>
-          <button class="nav-btn px-5 py-2 text-sm font-medium rounded-full transition-all duration-200" data-page="about">
-            <i class="fa-solid fa-circle-info mr-1.5 text-xs"></i> About
-          </button>
-          <button class="nav-btn px-5 py-2 text-sm font-medium rounded-full transition-all duration-200" data-page="fitur">
-            <i class="fa-solid fa-cubes mr-1.5 text-xs"></i> Fitur
-          </button>
-          <button class="nav-btn px-5 py-2 text-sm font-medium rounded-full transition-all duration-200" data-page="contact">
-            <i class="fa-solid fa-envelope mr-1.5 text-xs"></i> Contact
-          </button>
-        </nav>
-
-        <!-- Right Action Items (Dark Mode Toggle & CTA) -->
-        <div class="flex items-center gap-3">
-          <!-- Dark Mode Toggle Button -->
-          <button id="themeToggleBtn" aria-label="Ganti Tema" class="w-10 h-10 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-indigo-400 shadow-sm transition-all hover:scale-105">
-            <i id="themeIcon" class="fa-solid fa-moon"></i>
-          </button>
-
-          <!-- Action Button -->
-          <button class="nav-btn hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm shadow-md shadow-brand-500/25 hover:shadow-lg hover:shadow-brand-500/30 transition-all active:scale-95" data-page="contact">
-            Mulai Sekarang
-            <i class="fa-solid fa-arrow-right text-xs"></i>
-          </button>
-
-          <!-- Mobile Hamburger Toggle -->
-          <button id="mobileMenuBtn" aria-label="Buka Menu" class="md:hidden w-10 h-10 rounded-xl border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-            <i id="mobileMenuIcon" class="fa-solid fa-bars text-lg"></i>
-          </button>
+<body>
+    <!-- ═══════════ NAVBAR ═══════════ -->
+    <header id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo" data-nav="home">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Evene</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link active" data-nav="home">Home</a></li>
+                    <li><a href="#about" class="nav-link" data-nav="about">About</a></li>
+                    <li><a href="#events" class="nav-link" data-nav="events">Event Hub</a></li>
+                    <li><a href="#contact" class="nav-link" data-nav="contact">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="#events" class="btn btn-primary btn-nav" data-nav="events">Mulai Sekarang →</a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
+    </header>
 
-      </div>
+    <!-- ═══════════ MOBILE MENU ═══════════ -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#home" data-nav="home">Home</a></li>
+            <li><a href="#about" data-nav="about">About</a></li>
+            <li><a href="#events" data-nav="events">Event Hub</a></li>
+            <li><a href="#contact" data-nav="contact">Contact</a></li>
+        </ul>
     </div>
 
-    <!-- Mobile Navigation Dropdown -->
-    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-3 pb-5 space-y-2 shadow-xl animate-fadeIn">
-      <button class="nav-btn mobile-nav-btn w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors" data-page="home">
-        <i class="fa-solid fa-house w-6 text-brand-600 dark:text-indigo-400"></i> Home
-      </button>
-      <button class="nav-btn mobile-nav-btn w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors" data-page="about">
-        <i class="fa-solid fa-circle-info w-6 text-brand-600 dark:text-indigo-400"></i> About
-      </button>
-      <button class="nav-btn mobile-nav-btn w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors" data-page="fitur">
-        <i class="fa-solid fa-cubes w-6 text-brand-600 dark:text-indigo-400"></i> Fitur
-      </button>
-      <button class="nav-btn mobile-nav-btn w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors" data-page="contact">
-        <i class="fa-solid fa-envelope w-6 text-brand-600 dark:text-indigo-400"></i> Contact
-      </button>
+    <main id="app">
+        <!-- ═══════════ HOME ═══════════ -->
+        <section id="home" class="page active">
+            <!-- Hero -->
+            <div class="hero">
+                <div class="hero-content">
+                    <span class="badge">⚡ Single Page Application dengan DOM Manipulation</span>
+                    <h1>Temukan Event, <br>Jadi Relawan, <span class="gradient-text">Buat Dampak.</span></h1>
+                    <p class="hero-desc">Platform komunitas untuk menemukan event sosial, mendaftar sebagai relawan, dan menciptakan perubahan nyata di sekitarmu.</p>
+                    <div class="hero-buttons">
+                        <a href="#events" class="btn btn-primary" data-nav="events">Jelajahi Event →</a>
+                        <a href="#about" class="btn btn-outline" data-nav="about">Pelajari Lebih Lanjut</a>
+                    </div>
+                </div>
+                <div class="hero-card">
+                    <div class="hero-card-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+                    <div class="hero-card-content">
+                        <div class="hero-card-icon">🎯</div>
+                        <h3>Event Terdekat Segera!</h3>
+                        <p>Aksi Bersih Pantai Losari — <strong>22 Agustus 2026</strong></p>
+                        <p class="hero-card-location">📍 Pantai Losari, Makassar</p>
+                        <div class="hero-card-buttons">
+                            <button class="btn btn-sm btn-primary" onclick="navigateTo('events')">Lihat Detail</button>
+                            <button class="btn btn-sm btn-glass" onclick="navigateTo('events')">Daftar Sekarang</button>
+                        </div>
+                        <div class="hero-card-status">
+                            <span class="pulse"></span> 23 relawan sudah mendaftar
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search & Filter -->
+            <div class="search-section">
+                <div class="search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" placeholder="Cari event berdasarkan nama, lokasi, atau kategori..." autocomplete="off">
+                    <button class="btn btn-primary btn-sm" id="searchBtn">Cari</button>
+                </div>
+                <div class="filter-pills">
+                    <button class="pill active" data-filter="all">Semua</button>
+                    <button class="pill" data-filter="lingkungan">🌿 Lingkungan</button>
+                    <button class="pill" data-filter="pendidikan">📚 Pendidikan</button>
+                    <button class="pill" data-filter="kesehatan">❤️ Kesehatan</button>
+                    <button class="pill" data-filter="sosial">🤝 Sosial</button>
+                    <button class="pill" data-filter="teknologi">💻 Teknologi</button>
+                </div>
+            </div>
+
+            <!-- Event Grid -->
+            <div class="section-header">
+                <h2>Event <span class="gradient-text">Terpopuler</span></h2>
+                <p>Event yang paling banyak diminati komunitas</p>
+            </div>
+            <div class="event-grid" id="eventGrid">
+                <!-- Rendered by JS -->
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="156">0</div>
+                        <div class="stat-label">Total Event</div>
+                        <div class="stat-icon">📅</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="2480">0</div>
+                        <div class="stat-label">Relawan Aktif</div>
+                        <div class="stat-icon">🙋</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="48">0</div>
+                        <div class="stat-label">Kota Terjangkau</div>
+                        <div class="stat-icon">🏙️</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="12500">0</div>
+                        <div class="stat-label">Jam Kontribusi</div>
+                        <div class="stat-icon">⏱️</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ ABOUT ═══════════ -->
+        <section id="about" class="page">
+            <div class="page-header">
+                <span class="badge">Tentang Kami</span>
+                <h1>Membangun Komunitas <span class="gradient-text">Berdampak</span></h1>
+                <p>Evene hadir sebagai jembatan antara individu yang ingin berkontribusi dengan event-event sosial yang membutuhkan relawan.</p>
+            </div>
+
+            <!-- Mission -->
+            <div class="about-grid">
+                <div class="about-card glass-card">
+                    <div class="about-icon">🎯</div>
+                    <h3>Misi Kami</h3>
+                    <p>Menghubungkan ribuan relawan dengan ratusan event sosial di seluruh Indonesia, menciptakan dampak positif yang berkelanjutan.</p>
+                </div>
+                <div class="about-card glass-card">
+                    <div class="about-icon">👁️</div>
+                    <h3>Visi Kami</h3>
+                    <p>Menjadi platform #1 di Indonesia untuk kolaborasi komunitas dan kerelawanan, di mana setiap orang bisa berkontribusi.</p>
+                </div>
+                <div class="about-card glass-card">
+                    <div class="about-icon">💡</div>
+                    <h3>Nilai Kami</h3>
+                    <p>Transparansi, inklusivitas, dan kolaborasi. Kami percaya bahwa perubahan besar dimulai dari langkah kecil bersama.</p>
+                </div>
+            </div>
+
+            <!-- Team -->
+            <div class="section-header">
+                <h2>Tim <span class="gradient-text">Pengelola</span></h2>
+                <p>Orang-orang di balik platform Evene</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card glass-card">
+                    <div class="team-avatar">👨‍💻</div>
+                    <h4>Andi Pratama</h4>
+                    <span class="team-role">Founder & CEO</span>
+                    <p>Aktivis sosial berpengalaman 10+ tahun di bidang pemberdayaan komunitas.</p>
+                </div>
+                <div class="team-card glass-card">
+                    <div class="team-avatar">👩‍🎨</div>
+                    <h4>Sari Dewi</h4>
+                    <span class="team-role">Head of Design</span>
+                    <p>UI/UX designer yang passionate tentang desain inklusif dan accessible.</p>
+                </div>
+                <div class="team-card glass-card">
+                    <div class="team-avatar">👨‍🔧</div>
+                    <h4>Budi Santoso</h4>
+                    <span class="team-role">Lead Developer</span>
+                    <p>Full-stack developer dengan fokus pada pengembangan platform berdampak sosial.</p>
+                </div>
+                <div class="team-card glass-card">
+                    <div class="team-avatar">👩‍💼</div>
+                    <h4>Maya Putri</h4>
+                    <span class="team-role">Community Manager</span>
+                    <p>Mengelola jaringan 500+ komunitas relawan di seluruh Indonesia.</p>
+                </div>
+            </div>
+
+            <!-- Testimonials -->
+            <div class="section-header">
+                <h2>Kata <span class="gradient-text">Mereka</span></h2>
+                <p>Testimoni dari relawan yang sudah bergabung</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card glass-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Evene membantu saya menemukan komunitas yang tepat. Sekarang saya rutin ikut aksi bersih pantai setiap bulan!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">🧑</div>
+                        <div>
+                            <strong>Rizky Hidayat</strong>
+                            <span>Relawan Lingkungan</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card glass-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Platform yang sangat user-friendly! Saya bisa mengajukan event dan langsung mendapat relawan dalam hitungan hari."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">👩</div>
+                        <div>
+                            <strong>Fitri Anggraini</strong>
+                            <span>Penyelenggara Event</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card glass-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Sebagai mahasiswa, Evene memberi saya kesempatan untuk belajar sekaligus berkontribusi. Sangat recommended!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">👨</div>
+                        <div>
+                            <strong>Dimas Saputra</strong>
+                            <span>Relawan Pendidikan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ EVENT HUB ═══════════ -->
+        <section id="events" class="page">
+            <div class="page-header">
+                <span class="badge">Event Hub</span>
+                <h1>Temukan Event <span class="gradient-text">di Sekitarmu</span></h1>
+                <p>Jelajahi berbagai event sosial dan daftar sebagai relawan</p>
+            </div>
+
+            <!-- Event List (full detail) -->
+            <div class="event-hub-grid" id="eventHubGrid">
+                <!-- Rendered by JS -->
+            </div>
+
+            <!-- Event Detail Modal -->
+            <div class="modal-overlay" id="eventModal">
+                <div class="modal glass-card">
+                    <button class="modal-close" id="modalClose">✕</button>
+                    <div id="modalContent">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- RSVP Modal -->
+            <div class="modal-overlay" id="rsvpModal">
+                <div class="modal glass-card modal-sm">
+                    <button class="modal-close" id="rsvpModalClose">✕</button>
+                    <div class="modal-header">
+                        <div class="modal-icon">📝</div>
+                        <h2>Form Pendaftaran</h2>
+                        <p id="rsvpEventName"></p>
+                    </div>
+                    <form id="rsvpForm" class="form">
+                        <input type="hidden" id="rsvpEventId">
+                        <div class="form-group">
+                            <label for="rsvpName">Nama Lengkap *</label>
+                            <input type="text" id="rsvpName" placeholder="Masukkan nama lengkap" required>
+                            <span class="form-error" id="rsvpNameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="rsvpEmail">Email *</label>
+                            <input type="email" id="rsvpEmail" placeholder="email@contoh.com" required>
+                            <span class="form-error" id="rsvpEmailError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="rsvpPhone">No. WhatsApp *</label>
+                            <input type="tel" id="rsvpPhone" placeholder="08xxxxxxxxxx" required>
+                            <span class="form-error" id="rsvpPhoneError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="rsvpMotivation">Motivasi (opsional)</label>
+                            <textarea id="rsvpMotivation" rows="3" placeholder="Ceritakan alasan kamu ingin bergabung..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Daftar Sekarang 🚀</button>
+                    </form>
+                    <div id="rsvpSuccess" class="success-message" style="display:none;">
+                        <div class="success-icon">🎉</div>
+                        <h3>Pendaftaran Berhasil!</h3>
+                        <p>Terima kasih telah mendaftar. Kami akan menghubungi kamu melalui email.</p>
+                        <button class="btn btn-outline" onclick="closeModal('rsvpModal')">Tutup</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Event Section -->
+            <div class="submit-event-section">
+                <div class="glass-card submit-event-card">
+                    <div class="submit-event-header">
+                        <div class="submit-event-icon">🚀</div>
+                        <h2>Ajukan Event Baru</h2>
+                        <p>Punya ide event untuk komunitas? Ajukan melalui form di bawah dan tim kami akan meninjaunya.</p>
+                    </div>
+                    <form id="submitEventForm" class="form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="eventTitle">Nama Event *</label>
+                                <input type="text" id="eventTitle" placeholder="Nama event kamu" required>
+                                <span class="form-error" id="eventTitleError"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventCategory">Kategori *</label>
+                                <select id="eventCategory" required>
+                                    <option value="">Pilih kategori</option>
+                                    <option value="lingkungan">🌿 Lingkungan</option>
+                                    <option value="pendidikan">📚 Pendidikan</option>
+                                    <option value="kesehatan">❤️ Kesehatan</option>
+                                    <option value="sosial">🤝 Sosial</option>
+                                    <option value="teknologi">💻 Teknologi</option>
+                                </select>
+                                <span class="form-error" id="eventCategoryError"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="eventDate">Tanggal Event *</label>
+                                <input type="date" id="eventDate" required>
+                                <span class="form-error" id="eventDateError"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventLocation">Lokasi *</label>
+                                <input type="text" id="eventLocation" placeholder="Kota / alamat lengkap" required>
+                                <span class="form-error" id="eventLocationError"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventDescription">Deskripsi Event *</label>
+                            <textarea id="eventDescription" rows="4" placeholder="Jelaskan detail event, tujuan, dan kebutuhan relawan..." required></textarea>
+                            <span class="form-error" id="eventDescriptionError"></span>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="eventOrganizerName">Nama Penyelenggara *</label>
+                                <input type="text" id="eventOrganizerName" placeholder="Nama organisasi/komunitas" required>
+                                <span class="form-error" id="eventOrganizerNameError"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="eventOrganizerEmail">Email Penyelenggara *</label>
+                                <input type="email" id="eventOrganizerEmail" placeholder="email@organisasi.com" required>
+                                <span class="form-error" id="eventOrganizerEmailError"></span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Ajukan Event 📨</button>
+                    </form>
+                    <div id="submitEventSuccess" class="success-message" style="display:none;">
+                        <div class="success-icon">✅</div>
+                        <h3>Event Berhasil Diajukan!</h3>
+                        <p>Tim kami akan meninjau proposal event kamu dalam 2-3 hari kerja.</p>
+                        <button class="btn btn-outline" onclick="document.getElementById('submitEventSuccess').style.display='none'; document.getElementById('submitEventForm').style.display='block'; document.getElementById('submitEventForm').reset();">Ajukan Lagi</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ CONTACT ═══════════ -->
+        <section id="contact" class="page">
+            <div class="page-header">
+                <span class="badge">Hubungi Kami</span>
+                <h1>Ada Pertanyaan? <span class="gradient-text">Kami Siap Bantu</span></h1>
+                <p>Kirim pesan atau lihat FAQ di bawah</p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="glass-card contact-form-card">
+                    <h3>✉️ Kirim Pesan</h3>
+                    <form id="contactForm" class="form">
+                        <div class="form-group">
+                            <label for="contactName">Nama *</label>
+                            <input type="text" id="contactName" placeholder="Nama kamu" required>
+                            <span class="form-error" id="contactNameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail">Email *</label>
+                            <input type="email" id="contactEmail" placeholder="email@contoh.com" required>
+                            <span class="form-error" id="contactEmailError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactSubject">Subjek *</label>
+                            <select id="contactSubject" required>
+                                <option value="">Pilih subjek</option>
+                                <option value="umum">Pertanyaan Umum</option>
+                                <option value="event">Tentang Event</option>
+                                <option value="kerjasama">Kerjasama</option>
+                                <option value="bug">Laporan Bug</option>
+                                <option value="lainnya">Lainnya</option>
+                            </select>
+                            <span class="form-error" id="contactSubjectError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage">Pesan *</label>
+                            <textarea id="contactMessage" rows="5" placeholder="Tulis pesan kamu di sini..." required></textarea>
+                            <span class="form-error" id="contactMessageError"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Kirim Pesan 📩</button>
+                    </form>
+                    <div id="contactSuccess" class="success-message" style="display:none;">
+                        <div class="success-icon">📬</div>
+                        <h3>Pesan Terkirim!</h3>
+                        <p>Terima kasih! Tim kami akan membalas dalam 1×24 jam.</p>
+                        <button class="btn btn-outline" onclick="document.getElementById('contactSuccess').style.display='none'; document.getElementById('contactForm').style.display='block'; document.getElementById('contactForm').reset();">Kirim Lagi</button>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="glass-card contact-info-card">
+                        <h3>📍 Info Kontak</h3>
+                        <div class="contact-item">
+                            <span class="contact-item-icon">📧</span>
+                            <div>
+                                <strong>Email</strong>
+                                <p>hello@evene.id</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-item-icon">📱</span>
+                            <div>
+                                <strong>WhatsApp</strong>
+                                <p>+62 812-3456-7890</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-item-icon">🏢</span>
+                            <div>
+                                <strong>Kantor</strong>
+                                <p>Jl. Inovasi No. 42, Jakarta Selatan</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-item-icon">🕐</span>
+                            <div>
+                                <strong>Jam Operasional</strong>
+                                <p>Senin – Jumat, 09.00 – 17.00 WIB</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Media -->
+                    <div class="glass-card contact-info-card">
+                        <h3>🔗 Ikuti Kami</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link" title="Instagram">📸 Instagram</a>
+                            <a href="#" class="social-link" title="Twitter">🐦 Twitter</a>
+                            <a href="#" class="social-link" title="LinkedIn">💼 LinkedIn</a>
+                            <a href="#" class="social-link" title="YouTube">🎬 YouTube</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <div class="section-header" style="margin-top: 4rem;">
+                <h2>Pertanyaan <span class="gradient-text">Umum (FAQ)</span></h2>
+            </div>
+            <div class="faq-list" id="faqList">
+                <!-- Rendered by JS -->
+            </div>
+        </section>
+    </main>
+
+    <!-- ═══════════ FOOTER ═══════════ -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Evene</span>
+                <p>Platform event & relawan komunitas Indonesia.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <a href="#home" data-nav="home">Home</a>
+                    <a href="#events" data-nav="events">Event Hub</a>
+                    <a href="#about" data-nav="about">About</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Bantuan</h4>
+                    <a href="#contact" data-nav="contact">Contact</a>
+                    <a href="#contact" data-nav="contact">FAQ</a>
+                    <a href="#">Kebijakan Privasi</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Sosial Media</h4>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Evene. Dibuat dengan ❤️ untuk komunitas Indonesia.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span id="toastMessage"></span>
     </div>
-  </header>
 
-  <!-- ================= MAIN CONTENT CONTAINER (SPA VIEWS) ================= -->
-  <main id="app" class="flex-grow py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-    
-    <!-- 1. HOME SECTION -->
-    <section id="view-home" class="page-view animate-fade">
-      <div class="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-14rem)]">
-        <!-- Hero Left Column -->
-        <div class="space-y-6 text-center lg:text-left">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 dark:bg-brand-900/30 border border-brand-200 dark:border-brand-800 text-brand-600 dark:text-indigo-400 text-xs sm:text-sm font-medium shadow-sm">
-            <span class="w-2 h-2 rounded-full bg-brand-600 animate-pulse"></span>
-            Single Page Application dengan DOM Manipulation
-          </div>
-          
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
-            Membangun Web Modern dengan <span class="bg-gradient-to-r from-brand-600 to-indigo-400 bg-clip-text text-transparent">JavaScript DOM</span>
-          </h1>
-          
-          <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed">
-            Halaman ini berpindah view secara dinamis tanpa me-refresh browser. Menggunakan Event Listener, DOM Query, manipulasi Class, dan Dynamic Rendering.
-          </p>
-
-          <!-- Interactive Action Buttons -->
-          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
-            <button class="nav-btn px-6 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transition-all active:scale-95 flex items-center gap-2" data-page="fitur">
-              Jelajahi Fitur
-              <i class="fa-solid fa-arrow-right text-xs"></i>
-            </button>
-            <button class="nav-btn px-6 py-3.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 font-semibold hover:bg-slate-50 dark:hover:bg-slate-700/60 shadow-sm transition-all" data-page="about">
-              Pelajari Lebih Lanjut
-            </button>
-          </div>
-
-          <!-- Dynamic Counter Stats -->
-          <div class="grid grid-cols-3 gap-4 pt-8 border-t border-slate-200 dark:border-slate-800">
-            <div class="text-center lg:text-left">
-              <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white stat-counter" data-target="99">0</h3>
-              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Efisiensi Render (%)</p>
-            </div>
-            <div class="text-center lg:text-left">
-              <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white stat-counter" data-target="150">0</h3>
-              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Komponen Interaktif</p>
-            </div>
-            <div class="text-center lg:text-left">
-              <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white stat-counter" data-target="24">0</h3>
-              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Dukungan Jam / 7 Hari</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Hero Right Column (Interactive Visual Box) -->
-        <div class="relative">
-          <div class="absolute -inset-1 bg-gradient-to-r from-brand-600 to-indigo-400 rounded-3xl blur-2xl opacity-20 dark:opacity-30"></div>
-          <div class="relative bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 rounded-3xl p-6 sm:p-8 shadow-xl space-y-6">
-            
-            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-700/80 pb-4">
-              <div class="flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-red-400"></span>
-                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
-                <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
-              </div>
-              <span class="text-xs font-mono text-slate-400">live-dom-playground.js</span>
-            </div>
-
-            <!-- Interactive Live Card created via JS -->
-            <div id="interactiveBox" class="p-6 rounded-2xl bg-gradient-to-br from-indigo-50 to-brand-50/50 dark:from-slate-700/50 dark:to-slate-800/80 border border-brand-100 dark:border-slate-700 text-center space-y-4">
-              <div class="w-16 h-16 mx-auto rounded-2xl bg-brand-600 text-white flex items-center justify-center text-2xl shadow-lg shadow-brand-500/30">
-                <i id="interactiveIcon" class="fa-solid fa-wand-magic-sparkles"></i>
-              </div>
-              <h4 id="interactiveTitle" class="text-lg font-bold text-slate-900 dark:text-white">Uji Coba DOM Manipulation Langsung!</h4>
-              <p id="interactiveText" class="text-sm text-slate-600 dark:text-slate-300">
-                Klik tombol di bawah untuk mengubah elemen kotak ini secara dinamis melalui JavaScript DOM API.
-              </p>
-              <div class="flex flex-wrap justify-center gap-2 pt-2">
-                <button id="btnColorChange" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold shadow transition-all">
-                  🎨 Ganti Warna & Icon
-                </button>
-                <button id="btnTextRandom" class="px-4 py-2 bg-slate-800 dark:bg-slate-700 hover:bg-slate-900 text-white rounded-lg text-xs font-semibold shadow transition-all">
-                  ✨ Acak Pesan
-                </button>
-              </div>
-            </div>
-
-            <div class="text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-900/60 p-3.5 rounded-xl font-mono">
-              <span class="text-brand-600 dark:text-indigo-400">status:</span> <span id="domStatus">Siap menerima event listener click</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. ABOUT SECTION -->
-    <section id="view-about" class="page-view hidden animate-fade">
-      <div class="space-y-12 max-w-5xl mx-auto">
-        
-        <!-- Header -->
-        <div class="text-center space-y-4">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-900/30 border border-brand-200 dark:border-brand-800 text-brand-600 dark:text-indigo-400 text-xs font-semibold uppercase tracking-wider">
-            Tentang Kami & Arsitektur
-          </div>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
-            Konsep Single Page Application (SPA)
-          </h2>
-          <p class="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-base">
-            Bagaimana DOM (Document Object Model) manipulation bekerja untuk mengubah antarmuka pengguna tanpa memuat ulang browser secara penuh.
-          </p>
-        </div>
-
-        <!-- Pillar Cards -->
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-sm hover:shadow-md transition-shadow space-y-4">
-            <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl">
-              <i class="fa-solid fa-code"></i>
-            </div>
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white">1. DOM Querying</h3>
-            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-              Memilih elemen HTML target secara presisi menggunakan metode seperti <code class="bg-slate-100 dark:bg-slate-900 px-1 py-0.5 rounded text-brand-600">document.getElementById()</code> dan <code class="bg-slate-100 dark:bg-slate-900 px-1 py-0.5 rounded text-brand-600">querySelectorAll()</code>.
-            </p>
-          </div>
-
-          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-sm hover:shadow-md transition-shadow space-y-4">
-            <div class="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xl">
-              <i class="fa-solid fa-bolt"></i>
-            </div>
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white">2. Event Listeners</h3>
-            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-              Menangkap interaksi pengguna seperti klik, input form, scroll, atau submit melalui method <code class="bg-slate-100 dark:bg-slate-900 px-1 py-0.5 rounded text-brand-600">addEventListener()</code> secara responsif.
-            </p>
-          </div>
-
-          <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-sm hover:shadow-md transition-shadow space-y-4">
-            <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl">
-              <i class="fa-solid fa-arrows-rotate"></i>
-            </div>
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white">3. State & Class Toggling</h3>
-            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-              Mengubah tampilan visual secara instan dengan memanipulasi <code class="bg-slate-100 dark:bg-slate-900 px-1 py-0.5 rounded text-brand-600">classList.add()</code>, <code class="bg-slate-100 dark:bg-slate-900 px-1 py-0.5 rounded text-brand-600">classList.remove()</code>, atau menyuntikkan template HTML baru.
-            </p>
-          </div>
-        </div>
-
-        <!-- Interactive FAQ / Accordion Section (DOM Manipulated) -->
-        <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-slate-700/80 shadow-sm space-y-6">
-          <h3 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-            <i class="fa-solid fa-circle-question text-brand-600 dark:text-indigo-400"></i>
-            Frequently Asked Questions (Accordion DOM)
-          </h3>
-          
-          <div id="faqAccordion" class="space-y-3">
-            <div class="accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-              <button class="accordion-header w-full flex items-center justify-between p-4 text-left font-semibold text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-                <span>Apa keuntungan utama SPA dibandingkan Multi-Page Application?</span>
-                <i class="fa-solid fa-chevron-down transition-transform duration-200"></i>
-              </button>
-              <div class="accordion-body hidden px-4 pb-4 pt-1 text-slate-600 dark:text-slate-300 text-sm">
-                SPA memberikan pengalaman pengguna (UX) yang sangat mulus seperti aplikasi native karena hanya konten bagian dalam yang diperbarui, menghemat bandwidth dan menghilangkan efek layar putih (flicker) saat berpindah halaman.
-              </div>
-            </div>
-
-            <div class="accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-              <button class="accordion-header w-full flex items-center justify-between p-4 text-left font-semibold text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-                <span>Apakah aman memanipulasi DOM menggunakan JavaScript murni (Vanilla)?</span>
-                <i class="fa-solid fa-chevron-down transition-transform duration-200"></i>
-              </button>
-              <div class="accordion-body hidden px-4 pb-4 pt-1 text-slate-600 dark:text-slate-300 text-sm">
-                Sangat aman dan efisien untuk aplikasi skala kecil hingga menengah. Vanilla JS tidak memerlukan dependensi eksternal berukuran besar sehingga waktu muat (load time) sangat cepat.
-              </div>
-            </div>
-
-            <div class="accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
-              <button class="accordion-header w-full flex items-center justify-between p-4 text-left font-semibold text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-                <span>Bagaimana menjaga URL tetap sinkron saat view berubah?</span>
-                <i class="fa-solid fa-chevron-down transition-transform duration-200"></i>
-              </button>
-              <div class="accordion-body hidden px-4 pb-4 pt-1 text-slate-600 dark:text-slate-300 text-sm">
-                Kita dapat memanfaatkan <code class="bg-slate-100 dark:bg-slate-900 px-1 rounded text-brand-600">window.location.hash</code> atau <code class="bg-slate-100 dark:bg-slate-900 px-1 rounded text-brand-600">history.pushState()</code> untuk memperbarui URL tanpa memicu reload halaman.
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- 3. FITUR SECTION -->
-    <section id="view-fitur" class="page-view hidden animate-fade">
-      <div class="space-y-8">
-        
-        <!-- Section Header & Filter Categories -->
-        <div class="text-center space-y-4 max-w-3xl mx-auto">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-900/30 border border-brand-200 dark:border-brand-800 text-brand-600 dark:text-indigo-400 text-xs font-semibold uppercase tracking-wider">
-            Fitur Unggulan
-          </div>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
-            Eksplorasi Fitur Dinamis
-          </h2>
-          <p class="text-slate-600 dark:text-slate-300 text-base">
-            Daftar fitur di bawah dirender secara dinamis dari Array Data JavaScript menggunakan metode DOM Creation dan difilter secara real-time.
-          </p>
-
-          <!-- Dynamic Category Filter Buttons -->
-          <div id="featureFilters" class="flex flex-wrap justify-center gap-2 pt-4">
-            <button class="filter-btn active-filter px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all shadow-sm" data-category="all">
-              Semua Fitur
-            </button>
-            <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all shadow-sm" data-category="dom">
-              DOM Manipulation
-            </button>
-            <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all shadow-sm" data-category="performance">
-              Performa & UI
-            </button>
-            <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all shadow-sm" data-category="security">
-              Keamanan Data
-            </button>
-          </div>
-        </div>
-
-        <!-- Dynamic Features Grid (Container where JS will append elements) -->
-        <div id="featuresGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
-          <!-- Card elements dynamically created and rendered by app.js -->
-        </div>
-
-        <!-- Add Feature Mini-CTA (Demonstrating DOM Injection) -->
-        <div class="bg-gradient-to-r from-brand-600 to-indigo-600 rounded-3xl p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-brand-500/20">
-          <div class="space-y-2 text-center md:text-left">
-            <h3 class="text-2xl font-bold">Ingin Menambahkan Kartu Fitur Baru?</h3>
-            <p class="text-indigo-100 text-sm max-w-xl">
-              Coba tambahkan item fitur baru ke dalam DOM secara langsung tanpa database!
-            </p>
-          </div>
-          <button id="btnOpenAddFeature" class="px-6 py-3 rounded-xl bg-white text-brand-600 font-bold hover:bg-indigo-50 shadow-md transition-transform active:scale-95 whitespace-nowrap">
-            <i class="fa-solid fa-plus mr-1"></i> Tambah Fitur Dinamis
-          </button>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- 4. CONTACT SECTION -->
-    <section id="view-contact" class="page-view hidden animate-fade">
-      <div class="max-w-4xl mx-auto space-y-8">
-        
-        <!-- Header -->
-        <div class="text-center space-y-3">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-900/30 border border-brand-200 dark:border-brand-800 text-brand-600 dark:text-indigo-400 text-xs font-semibold uppercase tracking-wider">
-            Hubungi Kami
-          </div>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
-            Kirim Pesan Interaktif
-          </h2>
-          <p class="text-slate-600 dark:text-slate-300 text-base">
-            Formulir ini menggunakan validasi DOM secara realtime dan menampilkan feedback tanpa reload halaman.
-          </p>
-        </div>
-
-        <div class="grid md:grid-cols-5 gap-8 items-start">
-          
-          <!-- Contact Info Card (2 cols) -->
-          <div class="md:col-span-2 bg-gradient-to-br from-brand-600 to-indigo-700 text-white p-8 rounded-3xl shadow-xl space-y-6">
-            <div>
-              <h3 class="text-xl font-bold">Informasi Kontak</h3>
-              <p class="text-indigo-100 text-sm mt-1">Kami siap membantu menjawab kebutuhan web development Anda.</p>
-            </div>
-
-            <div class="space-y-4 text-sm">
-              <div class="flex items-start gap-3">
-                <i class="fa-solid fa-location-dot mt-1 text-indigo-200"></i>
-                <span>Jl. Raya Mojosari No. 45, Mojokerto, Jawa Timur</span>
-              </div>
-              <div class="flex items-center gap-3">
-                <i class="fa-solid fa-envelope text-indigo-200"></i>
-                <span>info@techflow-spa.id</span>
-              </div>
-              <div class="flex items-center gap-3">
-                <i class="fa-solid fa-phone text-indigo-200"></i>
-                <span>+62 812-3456-7890</span>
-              </div>
-            </div>
-
-            <div class="pt-6 border-t border-indigo-500/50">
-              <h4 class="text-xs uppercase font-semibold tracking-wider text-indigo-200 mb-3">Sosial Media</h4>
-              <div class="flex gap-3">
-                <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"><i class="fa-brands fa-github"></i></a>
-                <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Contact Form (3 cols) -->
-          <div class="md:col-span-3 bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200/80 dark:border-slate-700/80 shadow-md">
-            <form id="contactForm" class="space-y-5" novalidate>
-              
-              <!-- Nama -->
-              <div class="space-y-1.5">
-                <label for="contactName" class="block text-sm font-semibold text-slate-700 dark:text-slate-200">
-                  Nama Lengkap <span class="text-red-500">*</span>
-                </label>
-                <input type="text" id="contactName" name="name" placeholder="John Doe" 
-                  class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-900/50 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all text-sm">
-                <p id="errorName" class="text-xs text-red-500 font-medium hidden">Nama harus diisi minimal 3 karakter.</p>
-              </div>
-
-              <!-- Email -->
-              <div class="space-y-1.5">
-                <label for="contactEmail" class="block text-sm font-semibold text-slate-700 dark:text-slate-200">
-                  Alamat Email <span class="text-red-500">*</span>
-                </label>
-                <input type="email" id="contactEmail" name="email" placeholder="nama@email.com" 
-                  class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-900/50 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all text-sm">
-                <p id="errorEmail" class="text-xs text-red-500 font-medium hidden">Format email tidak valid.</p>
-              </div>
-
-              <!-- Subjek -->
-              <div class="space-y-1.5">
-                <label for="contactSubject" class="block text-sm font-semibold text-slate-700 dark:text-slate-200">
-                  Kategori Keperluan
-                </label>
-                <select id="contactSubject" name="subject" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-900/50 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all text-sm">
-                  <option value="Tanya Produk / Layanan">Tanya Produk / Layanan</option>
-                  <option value="Kolaborasi Proyek">Kolaborasi Proyek</option>
-                  <option value="Bantuan Teknis">Bantuan Teknis</option>
-                  <option value="Lainnya">Lainnya</option>
-                </select>
-              </div>
-
-              <!-- Pesan -->
-              <div class="space-y-1.5">
-                <label for="contactMessage" class="block text-sm font-semibold text-slate-700 dark:text-slate-200">
-                  Pesan Anda <span class="text-red-500">*</span>
-                </label>
-                <textarea id="contactMessage" name="message" rows="4" placeholder="Tuliskan detail pesan Anda di sini..." 
-                  class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50/50 dark:bg-slate-900/50 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all text-sm resize-none"></textarea>
-                <p id="errorMessage" class="text-xs text-red-500 font-medium hidden">Pesan tidak boleh kosong (minimal 10 karakter).</p>
-              </div>
-
-              <!-- Submit Button -->
-              <button type="submit" id="btnSubmitContact" class="w-full py-3.5 px-6 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transition-all flex items-center justify-center gap-2 active:scale-98">
-                <span id="btnSubmitText">Kirim Pesan Sekarang</span>
-                <i id="btnSubmitIcon" class="fa-solid fa-paper-plane text-xs"></i>
-              </button>
-
-            </form>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ================= MODAL TAMBAH FITUR (DOM POPUP) ================= -->
-  <div id="addFeatureModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white dark:bg-slate-800 w-full max-w-md rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-700 shadow-2xl space-y-5 animate-scaleUp">
-      <div class="flex items-center justify-between">
-        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Tambah Fitur Baru</h3>
-        <button id="btnCloseModal" class="w-8 h-8 rounded-full text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 flex items-center justify-center transition-colors">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-      </div>
-
-      <form id="newFeatureForm" class="space-y-4">
-        <div>
-          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Judul Fitur</label>
-          <input type="text" id="newFeatureTitle" required placeholder="Contoh: LocalStorage Cache" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Deskripsi</label>
-          <textarea id="newFeatureDesc" required rows="3" placeholder="Jelaskan kegunaan fitur ini..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none resize-none"></textarea>
-        </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Kategori</label>
-            <select id="newFeatureCategory" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
-              <option value="dom">DOM Manipulation</option>
-              <option value="performance">Performa & UI</option>
-              <option value="security">Keamanan Data</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Icon FontAwesome</label>
-            <select id="newFeatureIcon" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
-              <option value="fa-database">fa-database</option>
-              <option value="fa-shield-halved">fa-shield-halved</option>
-              <option value="fa-gauge-high">fa-gauge-high</option>
-              <option value="fa-microchip">fa-microchip</option>
-              <option value="fa-rocket">fa-rocket</option>
-            </select>
-          </div>
-        </div>
-
-        <button type="submit" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl text-sm shadow-md transition-transform active:scale-98">
-          Simpan & Render ke DOM
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- ================= TOAST NOTIFICATION CONTAINER ================= -->
-  <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none">
-    <!-- Toasts dynamically created via JS will appear here -->
-  </div>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-8 px-4 sm:px-6 lg:px-8 mt-12 transition-colors">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
-      <div class="flex items-center gap-2">
-        <span class="font-bold text-slate-700 dark:text-slate-200">TechFlow SPA</span> &copy; <span id="currentYear">2026</span>. All rights reserved.
-      </div>
-      <div class="flex items-center gap-6">
-        <a href="#home" class="nav-link hover:text-brand-600 transition-colors" data-page="home">Beranda</a>
-        <a href="#about" class="nav-link hover:text-brand-600 transition-colors" data-page="about">Tentang</a>
-        <a href="#fitur" class="nav-link hover:text-brand-600 transition-colors" data-page="fitur">Fitur</a>
-        <a href="#contact" class="nav-link hover:text-brand-600 transition-colors" data-page="contact">Kontak</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Main JavaScript File -->
-  <script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

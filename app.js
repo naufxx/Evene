@@ -1,647 +1,805 @@
-/**
- * =====================================================================
- * TechFlow SPA - JavaScript DOM Manipulation Core
- * =====================================================================
- * File ini mendemonstrasikan berbagai teknik manipulasi DOM:
- * 1. DOM Querying (querySelector, getElementById, querySelectorAll)
- * 2. Event Handling (click, submit, input, scroll, change, popstate)
- * 3. Class & Style Manipulation (classList.add/remove/toggle)
- * 4. Dynamic DOM Element Creation (createElement, appendChild, remove)
- * 5. Single Page Application (SPA) Client-side Routing via DOM
- * 6. Dynamic Form Validation & Feedback Toasts
- * =====================================================================
- */
+/* ═══════════════════════════════════════════
+   EVENE — App Logic (Vanilla JS SPA)
+   ═══════════════════════════════════════════ */
 
-// ==========================================
-// 1. DATA STATE & FITUR AWAL (DATA SOURCE)
-// ==========================================
-let featuresData = [
-  {
-    id: 1,
-    title: "Client-Side SPA Routing",
-    category: "dom",
-    icon: "fa-route",
-    color: "from-blue-500 to-indigo-500",
-    desc: "Perpindahan tampilan (view) instan tanpa memuat ulang browser, menjaga state dan efisiensi memori."
-  },
-  {
-    id: 2,
-    title: "Dynamic Element Creation",
-    category: "dom",
-    icon: "fa-wand-magic-sparkles",
-    desc: "Menghasilkan elemen HTML, kartu, dan notifikasi langsung dari array JavaScript menggunakan DocumentFragment.",
-    color: "from-purple-500 to-pink-500"
-  },
-  {
-    id: 3,
-    title: "Realtime Form Validation",
-    category: "security",
-    icon: "fa-shield-halved",
-    desc: "Memeriksa input pengguna secara langsung dan memberikan pesan error instan pada DOM sebelum submit.",
-    color: "from-emerald-500 to-teal-500"
-  },
-  {
-    id: 4,
-    title: "Light & Dark Mode Switcher",
-    category: "performance",
-    icon: "fa-circle-half-stroke",
-    desc: "Manipulasi root document class (`dark`) yang tersimpan otomatis di LocalStorage peramban.",
-    color: "from-amber-500 to-orange-500"
-  },
-  {
-    id: 5,
-    title: "Interactive Live Playground",
-    category: "dom",
-    icon: "fa-sliders",
-    desc: "Ubah warna, konten teks, dan icon elemen secara instan melalui event listener pada DOM nodes.",
-    color: "from-rose-500 to-red-500"
-  },
-  {
-    id: 6,
-    title: "Zero Heavy Framework",
-    category: "performance",
-    icon: "fa-bolt-lightning",
-    desc: "Kecepatan rendering maksimal dengan Vanilla JS murni tanpa overhead framework berukuran besar.",
-    color: "from-cyan-500 to-blue-500"
-  }
+// ── Event Data (Static JSON) ──
+const EVENTS_DATA = [
+    {
+        id: 1,
+        title: "Aksi Bersih Pantai Losari",
+        category: "lingkungan",
+        categoryLabel: "🌿 Lingkungan",
+        date: "2026-08-22",
+        time: "07:00 - 12:00 WIB",
+        location: "Pantai Losari, Makassar",
+        mapQuery: "Pantai+Losari+Makassar",
+        organizer: "Komunitas Hijau Makassar",
+        description: "Bergabunglah dalam aksi bersih pantai terbesar di Makassar! Kami akan membersihkan sampah plastik dan edukasi masyarakat tentang pentingnya menjaga kebersihan laut. Kegiatan ini diikuti oleh lebih dari 200 relawan setiap tahunnya.",
+        requirements: ["Usia minimal 16 tahun", "Membawa sarung tangan sendiri (opsional)", "Menggunakan pakaian nyaman & sepatu tertutup", "Siap beraktivitas di bawah terik matahari"],
+        volunteers: 23,
+        maxVolunteers: 50,
+        icon: "🏖️",
+        gradient: "linear-gradient(135deg, #6c5ce7, #00cec9)"
+    },
+    {
+        id: 2,
+        title: "Mengajar Anak Desa Cerdas",
+        category: "pendidikan",
+        categoryLabel: "📚 Pendidikan",
+        date: "2026-08-29",
+        time: "09:00 - 15:00 WIB",
+        location: "SDN 3 Bogor, Jawa Barat",
+        mapQuery: "SDN+3+Bogor+Jawa+Barat",
+        organizer: "Yayasan Cerdas Bangsa",
+        description: "Program mengajar satu hari untuk anak-anak di pedesaan Bogor. Relawan akan mengajar Matematika, Bahasa Inggris, dan kegiatan kreatif. Bawa semangat dan kreativitas kamu!",
+        requirements: ["Minimal mahasiswa semester 3", "Pengalaman mengajar (diutamakan)", "Sabar dan menyukai anak-anak", "Membawa alat tulis dan materi sendiri"],
+        volunteers: 15,
+        maxVolunteers: 30,
+        icon: "📖",
+        gradient: "linear-gradient(135deg, #e17055, #fdcb6e)"
+    },
+    {
+        id: 3,
+        title: "Donor Darah Massal PMI",
+        category: "kesehatan",
+        categoryLabel: "❤️ Kesehatan",
+        date: "2026-09-05",
+        time: "08:00 - 16:00 WIB",
+        location: "GOR Soemantri, Jakarta Selatan",
+        mapQuery: "GOR+Soemantri+Jakarta+Selatan",
+        organizer: "PMI DKI Jakarta",
+        description: "Event donor darah bulanan bekerja sama dengan PMI DKI Jakarta. Setiap tetes darahmu bisa menyelamatkan nyawa. Tersedia snack dan sertifikat untuk setiap pendonor.",
+        requirements: ["Usia 17-60 tahun", "Berat badan minimal 45 kg", "Tidak sedang minum obat tertentu", "Tidur cukup minimal 6 jam sebelum donor"],
+        volunteers: 45,
+        maxVolunteers: 100,
+        icon: "🩸",
+        gradient: "linear-gradient(135deg, #e17055, #e056a0)"
+    },
+    {
+        id: 4,
+        title: "Hackathon for Social Good",
+        category: "teknologi",
+        categoryLabel: "💻 Teknologi",
+        date: "2026-09-12",
+        time: "08:00 - 22:00 WIB",
+        location: "Gedung Inovasi, Bandung",
+        mapQuery: "Gedung+Inovasi+Bandung",
+        organizer: "Tech Community Bandung",
+        description: "Hackathon 14 jam untuk menciptakan solusi teknologi yang mengatasi masalah sosial. Tema: Aksesibilitas & Inklusi. Hadiah total Rp 50 juta untuk 3 tim terbaik.",
+        requirements: ["Tim terdiri dari 3-5 orang", "Membawa laptop masing-masing", "Dasar pemrograman (any language)", "Ide kreatif untuk dampak sosial"],
+        volunteers: 60,
+        maxVolunteers: 80,
+        icon: "💻",
+        gradient: "linear-gradient(135deg, #6c5ce7, #a55eea)"
+    },
+    {
+        id: 5,
+        title: "Bazar Ramah Disabilitas",
+        category: "sosial",
+        categoryLabel: "🤝 Sosial",
+        date: "2026-09-20",
+        time: "10:00 - 17:00 WIB",
+        location: "Taman Menteng, Jakarta Pusat",
+        mapQuery: "Taman+Menteng+Jakarta+Pusat",
+        organizer: "Yayasan Peduli Difabel",
+        description: "Bazar inklusif yang menjual produk karya teman-teman disabilitas. Relawan membantu setup booth, pendampingan penjual, dan edukasi pengunjung tentang aksesibilitas.",
+        requirements: ["Terbuka untuk semua usia", "Bersedia berdiri 4-6 jam", "Ramah dan komunikatif", "Pengalaman event management (plus)"],
+        volunteers: 18,
+        maxVolunteers: 40,
+        icon: "🤝",
+        gradient: "linear-gradient(135deg, #00b894, #00cec9)"
+    },
+    {
+        id: 6,
+        title: "Tanam 1000 Pohon Mangrove",
+        category: "lingkungan",
+        categoryLabel: "🌿 Lingkungan",
+        date: "2026-10-03",
+        time: "06:00 - 13:00 WIB",
+        location: "Pantai Indah Kapuk, Jakarta Utara",
+        mapQuery: "Pantai+Indah+Kapuk+Jakarta+Utara",
+        organizer: "Go Green Indonesia",
+        description: "Mari tanam 1000 pohon mangrove untuk melindungi pesisir dari abrasi dan menjaga ekosistem laut. Setiap relawan akan menanam minimal 5 bibit mangrove.",
+        requirements: ["Usia minimal 15 tahun", "Membawa pakaian ganti", "Siap kotor-kotoran di lumpur", "Tidak takut air payau"],
+        volunteers: 35,
+        maxVolunteers: 120,
+        icon: "🌳",
+        gradient: "linear-gradient(135deg, #00b894, #55efc4)"
+    },
+    {
+        id: 7,
+        title: "Workshop Literasi Digital Lansia",
+        category: "pendidikan",
+        categoryLabel: "📚 Pendidikan",
+        date: "2026-10-10",
+        time: "13:00 - 16:00 WIB",
+        location: "Balai Kelurahan Menteng, Jakarta",
+        mapQuery: "Balai+Kelurahan+Menteng+Jakarta",
+        organizer: "Digital Grandparents ID",
+        description: "Ajarkan kakek-nenek menggunakan smartphone, media sosial, dan menghindari hoax. Butuh relawan yang sabar dan pandai berkomunikasi dengan lansia.",
+        requirements: ["Sabar dan telaten", "Memahami smartphone Android/iOS", "Bisa berbicara pelan dan jelas", "Pengalaman mengajar lansia (plus)"],
+        volunteers: 8,
+        maxVolunteers: 20,
+        icon: "👴",
+        gradient: "linear-gradient(135deg, #fdcb6e, #e17055)"
+    },
+    {
+        id: 8,
+        title: "Festival Seni Anak Jalanan",
+        category: "sosial",
+        categoryLabel: "🤝 Sosial",
+        date: "2026-10-17",
+        time: "09:00 - 17:00 WIB",
+        location: "Taman Ismail Marzuki, Jakarta",
+        mapQuery: "Taman+Ismail+Marzuki+Jakarta",
+        organizer: "Sanggar Anak Langit",
+        description: "Festival seni yang menampilkan karya dan bakat anak-anak jalanan. Relawan membantu pendampingan, setup panggung, dokumentasi, dan penggalangan dana.",
+        requirements: ["Terbuka untuk semua usia", "Minat di bidang seni/budaya", "Bisa fotografi/videografi (plus)", "Bersedia full-day"],
+        volunteers: 28,
+        maxVolunteers: 50,
+        icon: "🎨",
+        gradient: "linear-gradient(135deg, #a55eea, #e056a0)"
+    },
+    {
+        id: 9,
+        title: "Pemeriksaan Kesehatan Gratis",
+        category: "kesehatan",
+        categoryLabel: "❤️ Kesehatan",
+        date: "2026-10-24",
+        time: "07:00 - 14:00 WIB",
+        location: "Puskesmas Tebet, Jakarta Selatan",
+        mapQuery: "Puskesmas+Tebet+Jakarta+Selatan",
+        organizer: "Dokter Tanpa Batas Indonesia",
+        description: "Kegiatan pemeriksaan kesehatan gratis untuk warga kurang mampu meliputi cek tensi, gula darah, kolesterol, dan konsultasi dokter umum.",
+        requirements: ["Mahasiswa kedokteran/keperawatan", "Atau relawan non-medis untuk administrasi", "Ramah dan teliti", "Bersedia bekerja dalam tim"],
+        volunteers: 12,
+        maxVolunteers: 35,
+        icon: "🏥",
+        gradient: "linear-gradient(135deg, #74b9ff, #6c5ce7)"
+    }
 ];
 
-// ==========================================
-// 2. DOM ELEMENTS SELECTION (DOM QUERYING)
-// ==========================================
-const views = document.querySelectorAll('.page-view');
-const navButtons = document.querySelectorAll('.nav-btn, .nav-link');
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-const mobileMenuIcon = document.getElementById('mobileMenuIcon');
-const themeToggleBtn = document.getElementById('themeToggleBtn');
-const themeIcon = document.getElementById('themeIcon');
-const featuresGrid = document.getElementById('featuresGrid');
-const filterButtons = document.querySelectorAll('.filter-btn');
-const contactForm = document.getElementById('contactForm');
-const toastContainer = document.getElementById('toastContainer');
-const currentYearSpan = document.getElementById('currentYear');
+const FAQ_DATA = [
+    {
+        q: "Bagaimana cara mendaftar sebagai relawan?",
+        a: "Cukup buka halaman Event Hub, pilih event yang kamu minati, klik tombol 'Daftar Sekarang' dan isi form pendaftaran. Kami akan menghubungi kamu via email untuk konfirmasi."
+    },
+    {
+        q: "Apakah ada biaya untuk bergabung?",
+        a: "Tidak! Semua event di Evene 100% gratis untuk relawan. Beberapa event bahkan menyediakan konsumsi, transportasi, dan sertifikat."
+    },
+    {
+        q: "Bagaimana cara mengajukan event baru?",
+        a: "Buka halaman Event Hub, scroll ke bawah hingga menemukan form 'Ajukan Event Baru'. Isi detail event kamu dan tim kami akan meninjau dalam 2-3 hari kerja."
+    },
+    {
+        q: "Apakah saya bisa ikut event di luar kota saya?",
+        a: "Tentu! Kamu bisa ikut event di mana saja. Namun, transportasi dan akomodasi menjadi tanggung jawab masing-masing relawan kecuali disebutkan lain oleh penyelenggara."
+    },
+    {
+        q: "Apakah ada sertifikat setelah mengikuti event?",
+        a: "Sebagian besar event menyediakan sertifikat partisipasi atau e-certificate. Informasi ini tercantum di detail setiap event."
+    },
+    {
+        q: "Bagaimana jika saya ingin membatalkan pendaftaran?",
+        a: "Hubungi kami melalui halaman Contact atau email ke hello@evene.id minimal 3 hari sebelum event. Pembatalan mendadak bisa mempengaruhi peluang kamu di event berikutnya."
+    }
+];
 
-// Modal Elements
-const addFeatureModal = document.getElementById('addFeatureModal');
-const btnOpenAddFeature = document.getElementById('btnOpenAddFeature');
-const btnCloseModal = document.getElementById('btnCloseModal');
-const newFeatureForm = document.getElementById('newFeatureForm');
+// ── Month Names (Indonesian) ──
+const MONTHS_ID = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+const MONTHS_FULL = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
-// Interactive Hero Playground Elements
-const interactiveBox = document.getElementById('interactiveBox');
-const interactiveIcon = document.getElementById('interactiveIcon');
-const interactiveTitle = document.getElementById('interactiveTitle');
-const interactiveText = document.getElementById('interactiveText');
-const btnColorChange = document.getElementById('btnColorChange');
-const btnTextRandom = document.getElementById('btnTextRandom');
-const domStatus = document.getElementById('domStatus');
-
-// ==========================================
-// 3. SPA ROUTING VIA DOM MANIPULATION
-// ==========================================
-/**
- * Berpindah tampilan (view) dengan menyembunyikan view lain
- * dan menampilkan view yang dipilih via manipulasi class 'hidden'.
- * @param {string} pageId - ID halaman target (home, about, fitur, contact)
- */
+// ══════════════════════
+// NAVIGATION (SPA)
+// ══════════════════════
 function navigateTo(pageId) {
-  // 1. Validasi keberadaan elemen target
-  const targetView = document.getElementById(`view-${pageId}`);
-  if (!targetView) return;
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
 
-  // 2. Sembunyikan semua page-view dengan menambahkan class 'hidden'
-  views.forEach(view => {
-    view.classList.add('hidden');
-    view.classList.remove('animate-fade');
-  });
-
-  // 3. Tampilkan target view & picu animasi
-  targetView.classList.remove('hidden');
-  void targetView.offsetWidth; // Force reflow agar animasi CSS terpicu ulang
-  targetView.classList.add('animate-fade');
-
-  // 4. Perbarui indikator tombol navigasi yang aktif (Active State)
-  updateActiveNav(pageId);
-
-  // 5. Tutup mobile menu jika sedang terbuka
-  if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-    toggleMobileMenu(false);
-  }
-
-  // 6. Update URL Hash tanpa memicu page reload
-  window.history.pushState({ page: pageId }, '', `#${pageId}`);
-
-  // 7. Scroll ke atas halaman dengan halus
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  // 8. Jika membuka halaman home, trigger animasi counter angka
-  if (pageId === 'home') {
-    startCounters();
-  }
-}
-
-/**
- * Memperbarui status tombol navigasi aktif
- */
-function updateActiveNav(pageId) {
-  navButtons.forEach(btn => {
-    if (btn.dataset.page === pageId) {
-      btn.classList.add('active-nav');
-    } else {
-      btn.classList.remove('active-nav');
+    // Show target page
+    const target = document.getElementById(pageId);
+    if (target) {
+        target.classList.add('active');
+        // Re-trigger animation
+        target.style.animation = 'none';
+        target.offsetHeight; // reflow
+        target.style.animation = '';
     }
-  });
+
+    // Update nav active state
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.toggle('active', link.dataset.nav === pageId);
+    });
+
+    // Close mobile menu
+    closeMobileMenu();
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Trigger stats animation if home
+    if (pageId === 'home') {
+        setTimeout(animateStats, 500);
+    }
 }
 
-// Pasang event listener ke seluruh tombol & link navigasi
-navButtons.forEach(btn => {
-  btn.addEventListener('click', (e) => {
+// Handle all navigation clicks (data-nav)
+document.addEventListener('click', (e) => {
+    const navEl = e.target.closest('[data-nav]');
+    if (navEl) {
+        e.preventDefault();
+        navigateTo(navEl.dataset.nav);
+    }
+});
+
+// ══════════════════════
+// MOBILE MENU
+// ══════════════════════
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('open');
+});
+
+function closeMobileMenu() {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('open');
+}
+
+// ══════════════════════
+// NAVBAR SCROLL EFFECT
+// ══════════════════════
+window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ══════════════════════
+// RENDER EVENT CARDS (Home)
+// ══════════════════════
+function renderEventCards(events) {
+    const grid = document.getElementById('eventGrid');
+    if (!grid) return;
+
+    if (events.length === 0) {
+        grid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+                <h3 style="margin-bottom: 0.5rem;">Tidak ada event ditemukan</h3>
+                <p style="color: var(--text-secondary);">Coba ubah kata kunci atau filter pencarian</p>
+            </div>
+        `;
+        return;
+    }
+
+    grid.innerHTML = events.map((event, i) => {
+        const d = new Date(event.date);
+        const day = d.getDate();
+        const month = MONTHS_ID[d.getMonth()];
+        const pct = Math.round((event.volunteers / event.maxVolunteers) * 100);
+
+        return `
+            <div class="event-card" style="animation-delay: ${i * 0.1}s" onclick="openEventDetail(${event.id})">
+                <div class="event-card-image" style="background: ${event.gradient}">
+                    <span class="event-card-category">${event.categoryLabel}</span>
+                    <div class="event-card-date-badge">
+                        <span class="day">${day}</span>
+                        <span class="month">${month}</span>
+                    </div>
+                    <span style="font-size: 3rem; z-index: 1;">${event.icon}</span>
+                </div>
+                <div class="event-card-body">
+                    <h3>${event.title}</h3>
+                    <div class="event-card-meta">
+                        <span>📍 ${event.location}</span>
+                        <span>🕐 ${event.time}</span>
+                        <span>🏢 ${event.organizer}</span>
+                    </div>
+                    <div class="event-card-footer">
+                        <span class="event-card-volunteers">
+                            <strong>${event.volunteers}</strong>/${event.maxVolunteers} relawan (${pct}%)
+                        </span>
+                        <button class="btn btn-sm btn-primary" onclick="event.stopPropagation(); openRsvpModal(${event.id})">Daftar</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// ══════════════════════
+// RENDER EVENT HUB (Full)
+// ══════════════════════
+function renderEventHub(events) {
+    const grid = document.getElementById('eventHubGrid');
+    if (!grid) return;
+
+    grid.innerHTML = events.map((event, i) => {
+        const d = new Date(event.date);
+        const dateStr = `${d.getDate()} ${MONTHS_FULL[d.getMonth()]} ${d.getFullYear()}`;
+        const pct = Math.round((event.volunteers / event.maxVolunteers) * 100);
+
+        return `
+            <div class="event-hub-card" style="animation-delay: ${i * 0.08}s">
+                <div class="event-hub-card-header">
+                    <div>
+                        <h3>${event.icon} ${event.title}</h3>
+                        <span class="badge" style="margin-top: 0.5rem;">${event.categoryLabel}</span>
+                    </div>
+                </div>
+                <div class="event-hub-card-body">
+                    <p>${event.description}</p>
+                    <div class="event-hub-meta">
+                        <span class="event-hub-meta-item">📅 ${dateStr}</span>
+                        <span class="event-hub-meta-item">🕐 ${event.time}</span>
+                        <span class="event-hub-meta-item">📍 ${event.location}</span>
+                        <span class="event-hub-meta-item">🏢 ${event.organizer}</span>
+                        <span class="event-hub-meta-item">👥 ${event.volunteers}/${event.maxVolunteers} (${pct}%)</span>
+                    </div>
+                </div>
+                <div class="event-hub-card-actions">
+                    <button class="btn btn-primary" onclick="openEventDetail(${event.id})">Lihat Detail</button>
+                    <button class="btn btn-outline" onclick="openRsvpModal(${event.id})">Daftar / RSVP</button>
+                    <button class="btn btn-glass" onclick="addToCalendar(${event.id})">📅 Kalender</button>
+                    <button class="btn btn-glass" onclick="shareToWhatsApp(${event.id})">💬 Share WA</button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// ══════════════════════
+// SEARCH & FILTER
+// ══════════════════════
+let currentFilter = 'all';
+let currentSearch = '';
+
+function filterAndSearch() {
+    let filtered = EVENTS_DATA;
+
+    if (currentFilter !== 'all') {
+        filtered = filtered.filter(e => e.category === currentFilter);
+    }
+
+    if (currentSearch.trim()) {
+        const q = currentSearch.toLowerCase().trim();
+        filtered = filtered.filter(e =>
+            e.title.toLowerCase().includes(q) ||
+            e.location.toLowerCase().includes(q) ||
+            e.category.toLowerCase().includes(q) ||
+            e.organizer.toLowerCase().includes(q) ||
+            e.description.toLowerCase().includes(q)
+        );
+    }
+
+    renderEventCards(filtered);
+}
+
+// Filter pills
+document.querySelectorAll('.pill[data-filter]').forEach(pill => {
+    pill.addEventListener('click', () => {
+        document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentFilter = pill.dataset.filter;
+        filterAndSearch();
+    });
+});
+
+// Search input
+const searchInput = document.getElementById('searchInput');
+const searchBtn = document.getElementById('searchBtn');
+
+searchInput.addEventListener('input', (e) => {
+    currentSearch = e.target.value;
+    filterAndSearch();
+});
+
+searchBtn.addEventListener('click', () => {
+    filterAndSearch();
+});
+
+searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        filterAndSearch();
+    }
+});
+
+// ══════════════════════
+// EVENT DETAIL MODAL
+// ══════════════════════
+function openEventDetail(eventId) {
+    const event = EVENTS_DATA.find(e => e.id === eventId);
+    if (!event) return;
+
+    const d = new Date(event.date);
+    const dateStr = `${d.getDate()} ${MONTHS_FULL[d.getMonth()]} ${d.getFullYear()}`;
+    const pct = Math.round((event.volunteers / event.maxVolunteers) * 100);
+
+    const modal = document.getElementById('eventModal');
+    const content = document.getElementById('modalContent');
+
+    content.innerHTML = `
+        <div class="modal-event-icon">${event.icon}</div>
+        <h2 class="modal-event-title">${event.title}</h2>
+        <div class="modal-event-category"><span class="badge">${event.categoryLabel}</span></div>
+        <p class="modal-event-desc">${event.description}</p>
+
+        <div class="modal-event-info">
+            <div class="modal-event-info-item">
+                <strong>📅 Tanggal</strong>
+                <span>${dateStr}</span>
+            </div>
+            <div class="modal-event-info-item">
+                <strong>🕐 Waktu</strong>
+                <span>${event.time}</span>
+            </div>
+            <div class="modal-event-info-item">
+                <strong>📍 Lokasi</strong>
+                <span>${event.location}</span>
+            </div>
+            <div class="modal-event-info-item">
+                <strong>🏢 Penyelenggara</strong>
+                <span>${event.organizer}</span>
+            </div>
+            <div class="modal-event-info-item">
+                <strong>👥 Relawan</strong>
+                <span>${event.volunteers} / ${event.maxVolunteers} (${pct}%)</span>
+            </div>
+            <div class="modal-event-info-item">
+                <strong>📊 Status</strong>
+                <span style="color: ${pct >= 80 ? 'var(--warning)' : 'var(--success)'}">
+                    ${pct >= 100 ? 'Penuh' : pct >= 80 ? 'Hampir Penuh' : 'Tersedia'}
+                </span>
+            </div>
+        </div>
+
+        <div class="modal-event-requirements">
+            <h4>📋 Syarat & Ketentuan</h4>
+            <ul>
+                ${event.requirements.map(r => `<li>${r}</li>`).join('')}
+            </ul>
+        </div>
+
+        <div class="modal-event-map">
+            <iframe
+                src="https://www.google.com/maps?q=${event.mapQuery}&output=embed"
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Lokasi ${event.title}"
+            ></iframe>
+        </div>
+
+        <div class="modal-event-actions">
+            <button class="btn btn-primary" onclick="closeModal('eventModal'); openRsvpModal(${event.id})">
+                📝 Daftar Sekarang
+            </button>
+            <button class="btn btn-outline" onclick="addToCalendar(${event.id})">
+                📅 Tambah ke Kalender
+            </button>
+            <button class="btn btn-glass" onclick="shareToWhatsApp(${event.id})">
+                💬 Share WhatsApp
+            </button>
+        </div>
+    `;
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+// ══════════════════════
+// RSVP MODAL
+// ══════════════════════
+function openRsvpModal(eventId) {
+    const event = EVENTS_DATA.find(e => e.id === eventId);
+    if (!event) return;
+
+    document.getElementById('rsvpEventName').textContent = event.title;
+    document.getElementById('rsvpEventId').value = eventId;
+
+    // Reset form
+    document.getElementById('rsvpForm').style.display = 'flex';
+    document.getElementById('rsvpSuccess').style.display = 'none';
+    document.getElementById('rsvpForm').reset();
+    clearFormErrors('rsvpForm');
+
+    document.getElementById('rsvpModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+// ══════════════════════
+// CLOSE MODALS
+// ══════════════════════
+function closeModal(modalId) {
+    document.getElementById(modalId).classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+document.getElementById('modalClose').addEventListener('click', () => closeModal('eventModal'));
+document.getElementById('rsvpModalClose').addEventListener('click', () => closeModal('rsvpModal'));
+
+// Close on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            closeModal(overlay.id);
+        }
+    });
+});
+
+// Close on Escape
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id));
+    }
+});
+
+// ══════════════════════
+// CALENDAR & SHARE
+// ══════════════════════
+function addToCalendar(eventId) {
+    const event = EVENTS_DATA.find(e => e.id === eventId);
+    if (!event) return;
+
+    const d = new Date(event.date);
+    const dateStr = d.toISOString().replace(/-|:|\.\d+/g, '').slice(0, 8);
+    const title = encodeURIComponent(event.title);
+    const details = encodeURIComponent(event.description);
+    const location = encodeURIComponent(event.location);
+
+    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dateStr}/${dateStr}&details=${details}&location=${location}`;
+    window.open(url, '_blank');
+    showToast('📅 Membuka Google Calendar...');
+}
+
+function shareToWhatsApp(eventId) {
+    const event = EVENTS_DATA.find(e => e.id === eventId);
+    if (!event) return;
+
+    const d = new Date(event.date);
+    const dateStr = `${d.getDate()} ${MONTHS_FULL[d.getMonth()]} ${d.getFullYear()}`;
+    const text = encodeURIComponent(
+        `🎯 *${event.title}*\n\n` +
+        `📅 ${dateStr}\n` +
+        `🕐 ${event.time}\n` +
+        `📍 ${event.location}\n` +
+        `🏢 ${event.organizer}\n\n` +
+        `${event.description.slice(0, 150)}...\n\n` +
+        `👥 ${event.volunteers}/${event.maxVolunteers} relawan sudah mendaftar!\n\n` +
+        `Daftar sekarang di Evene! ⚡`
+    );
+    window.open(`https://wa.me/?text=${text}`, '_blank');
+    showToast('💬 Membuka WhatsApp...');
+}
+
+// ══════════════════════
+// FORM VALIDATION
+// ══════════════════════
+function validateField(inputId, errorId, rules) {
+    const input = document.getElementById(inputId);
+    const errorEl = document.getElementById(errorId);
+    const value = input.value.trim();
+    let errorMsg = '';
+
+    for (const rule of rules) {
+        if (rule.required && !value) {
+            errorMsg = rule.message || 'Field ini wajib diisi';
+            break;
+        }
+        if (rule.email && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+            errorMsg = rule.message || 'Format email tidak valid';
+            break;
+        }
+        if (rule.phone && value && !/^(\+62|62|0)8[0-9]{8,12}$/.test(value)) {
+            errorMsg = rule.message || 'Format nomor tidak valid (08xxxxxxxxxx)';
+            break;
+        }
+        if (rule.minLength && value && value.length < rule.minLength) {
+            errorMsg = rule.message || `Minimal ${rule.minLength} karakter`;
+            break;
+        }
+    }
+
+    if (errorMsg) {
+        input.classList.add('error');
+        errorEl.textContent = errorMsg;
+        return false;
+    } else {
+        input.classList.remove('error');
+        errorEl.textContent = '';
+        return true;
+    }
+}
+
+function clearFormErrors(formId) {
+    const form = document.getElementById(formId);
+    form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+    form.querySelectorAll('.form-error').forEach(el => el.textContent = '');
+}
+
+// ── RSVP Form Submit ──
+document.getElementById('rsvpForm').addEventListener('submit', (e) => {
     e.preventDefault();
-    const targetPage = btn.dataset.page;
-    if (targetPage) {
-      navigateTo(targetPage);
+
+    const nameOk = validateField('rsvpName', 'rsvpNameError', [
+        { required: true, message: 'Nama wajib diisi' },
+        { minLength: 3, message: 'Nama minimal 3 karakter' }
+    ]);
+    const emailOk = validateField('rsvpEmail', 'rsvpEmailError', [
+        { required: true, message: 'Email wajib diisi' },
+        { email: true, message: 'Format email tidak valid' }
+    ]);
+    const phoneOk = validateField('rsvpPhone', 'rsvpPhoneError', [
+        { required: true, message: 'Nomor WhatsApp wajib diisi' },
+        { phone: true, message: 'Format: 08xxxxxxxxxx' }
+    ]);
+
+    if (nameOk && emailOk && phoneOk) {
+        document.getElementById('rsvpForm').style.display = 'none';
+        document.getElementById('rsvpSuccess').style.display = 'block';
+        showToast('🎉 Pendaftaran berhasil!');
     }
-  });
 });
 
-// Listener untuk tombol Back/Forward browser
-window.addEventListener('popstate', () => {
-  const hash = window.location.hash.replace('#', '') || 'home';
-  navigateTo(hash);
-});
+// ── Contact Form Submit ──
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
 
-// ==========================================
-// 4. DYNAMIC FEATURES RENDERING (DOM CREATION)
-// ==========================================
-/**
- * Merender daftar fitur ke dalam container #featuresGrid
- * @param {Array} list - Array objek fitur
- */
-function renderFeatures(list) {
-  // Kosongkan isi grid sebelumnya
-  featuresGrid.innerHTML = '';
+    const nameOk = validateField('contactName', 'contactNameError', [
+        { required: true, message: 'Nama wajib diisi' }
+    ]);
+    const emailOk = validateField('contactEmail', 'contactEmailError', [
+        { required: true, message: 'Email wajib diisi' },
+        { email: true, message: 'Format email tidak valid' }
+    ]);
+    const subjectOk = validateField('contactSubject', 'contactSubjectError', [
+        { required: true, message: 'Pilih subjek pesan' }
+    ]);
+    const messageOk = validateField('contactMessage', 'contactMessageError', [
+        { required: true, message: 'Pesan wajib diisi' },
+        { minLength: 10, message: 'Pesan minimal 10 karakter' }
+    ]);
 
-  if (list.length === 0) {
-    featuresGrid.innerHTML = `
-      <div class="col-span-full py-12 text-center text-slate-400">
-        <i class="fa-solid fa-folder-open text-4xl mb-3"></i>
-        <p>Tidak ada fitur dalam kategori ini.</p>
-      </div>
-    `;
-    return;
-  }
-
-  // Fragment untuk optimalisasi performa rendering DOM
-  const fragment = document.createDocumentFragment();
-
-  list.forEach(item => {
-    // 1. Buat elemen card utama
-    const card = document.createElement('div');
-    card.className = 'group bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-700/80 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between animate-fade';
-    card.setAttribute('data-id', item.id);
-
-    // 2. Isi konten card via template HTML
-    card.innerHTML = `
-      <div class="space-y-4">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr ${item.color || 'from-indigo-500 to-brand-600'} text-white flex items-center justify-center text-xl shadow-md shadow-brand-500/20 group-hover:scale-110 transition-transform">
-          <i class="fa-solid ${item.icon}"></i>
-        </div>
-        <div>
-          <span class="inline-block px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-full bg-slate-100 dark:bg-slate-700/70 text-slate-600 dark:text-slate-300 mb-2">
-            ${item.category.toUpperCase()}
-          </span>
-          <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-indigo-400 transition-colors">
-            ${escapeHtml(item.title)}
-          </h3>
-        </div>
-        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-          ${escapeHtml(item.desc)}
-        </p>
-      </div>
-
-      <div class="pt-5 mt-4 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
-        <span class="text-xs font-semibold text-brand-600 dark:text-indigo-400">Aktif & Siap Pakai</span>
-        <button class="delete-feature-btn text-xs text-slate-400 hover:text-red-500 dark:hover:text-red-400 transition-colors p-1" title="Hapus Fitur (DOM remove)">
-          <i class="fa-solid fa-trash-can"></i>
-        </button>
-      </div>
-    `;
-
-    // 3. Pasang Event Listener untuk tombol hapus kartu fitur (DOM Deletion)
-    const deleteBtn = card.querySelector('.delete-feature-btn');
-    deleteBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      deleteFeature(item.id, card);
-    });
-
-    fragment.appendChild(card);
-  });
-
-  // Masukkan fragment ke dalam DOM
-  featuresGrid.appendChild(fragment);
-}
-
-/**
- * Menghapus fitur dari Array & menghapus node dari DOM
- */
-function deleteFeature(id, cardElement) {
-  // Hapus dari data array
-  featuresData = featuresData.filter(f => f.id !== id);
-
-  // Animasi pengecilan sebelum node di-remove dari DOM
-  cardElement.style.transition = 'all 0.25s ease';
-  cardElement.style.opacity = '0';
-  cardElement.style.transform = 'scale(0.8)';
-
-  setTimeout(() => {
-    cardElement.remove(); // DOM element remove() method
-    showToast('Fitur berhasil dihapus dari DOM!', 'info');
-  }, 250);
-}
-
-/**
- * Filter fitur berdasarkan kategori
- */
-filterButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    // 1. Update status tombol filter
-    filterButtons.forEach(b => {
-      b.classList.remove('active-filter');
-      b.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300', 'border', 'border-slate-200', 'dark:border-slate-700');
-    });
-
-    btn.classList.add('active-filter');
-    btn.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300', 'border', 'border-slate-200', 'dark:border-slate-700');
-
-    // 2. Filter data
-    const category = btn.dataset.category;
-    if (category === 'all') {
-      renderFeatures(featuresData);
-    } else {
-      const filtered = featuresData.filter(f => f.category === category);
-      renderFeatures(filtered);
+    if (nameOk && emailOk && subjectOk && messageOk) {
+        document.getElementById('contactForm').style.display = 'none';
+        document.getElementById('contactSuccess').style.display = 'block';
+        showToast('📬 Pesan berhasil terkirim!');
     }
-  });
 });
 
-// ==========================================
-// 5. MODAL TAMBAH FITUR DINAMIS
-// ==========================================
-function toggleModal(show) {
-  if (show) {
-    addFeatureModal.classList.remove('hidden');
-    addFeatureModal.classList.add('flex');
-    document.body.classList.add('overflow-hidden');
-  } else {
-    addFeatureModal.classList.add('hidden');
-    addFeatureModal.classList.remove('flex');
-    document.body.classList.remove('overflow-hidden');
-    newFeatureForm.reset();
-  }
+// ── Submit Event Form ──
+document.getElementById('submitEventForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const fields = [
+        ['eventTitle', 'eventTitleError', [{ required: true, message: 'Nama event wajib diisi' }]],
+        ['eventCategory', 'eventCategoryError', [{ required: true, message: 'Pilih kategori' }]],
+        ['eventDate', 'eventDateError', [{ required: true, message: 'Tanggal wajib diisi' }]],
+        ['eventLocation', 'eventLocationError', [{ required: true, message: 'Lokasi wajib diisi' }]],
+        ['eventDescription', 'eventDescriptionError', [{ required: true, message: 'Deskripsi wajib diisi' }, { minLength: 20, message: 'Deskripsi minimal 20 karakter' }]],
+        ['eventOrganizerName', 'eventOrganizerNameError', [{ required: true, message: 'Nama penyelenggara wajib diisi' }]],
+        ['eventOrganizerEmail', 'eventOrganizerEmailError', [{ required: true, message: 'Email wajib diisi' }, { email: true, message: 'Format email tidak valid' }]]
+    ];
+
+    let allOk = true;
+    for (const [id, errorId, rules] of fields) {
+        if (!validateField(id, errorId, rules)) allOk = false;
+    }
+
+    if (allOk) {
+        document.getElementById('submitEventForm').style.display = 'none';
+        document.getElementById('submitEventSuccess').style.display = 'block';
+        showToast('✅ Event berhasil diajukan!');
+    }
+});
+
+// ══════════════════════
+// FAQ ACCORDION
+// ══════════════════════
+function renderFAQ() {
+    const list = document.getElementById('faqList');
+    if (!list) return;
+
+    list.innerHTML = FAQ_DATA.map((faq, i) => `
+        <div class="faq-item" data-faq="${i}">
+            <button class="faq-question" onclick="toggleFaq(${i})">
+                <span>${faq.q}</span>
+                <span class="faq-toggle">+</span>
+            </button>
+            <div class="faq-answer">
+                <p>${faq.a}</p>
+            </div>
+        </div>
+    `).join('');
 }
 
-btnOpenAddFeature.addEventListener('click', () => toggleModal(true));
-btnCloseModal.addEventListener('click', () => toggleModal(false));
-addFeatureModal.addEventListener('click', (e) => {
-  if (e.target === addFeatureModal) toggleModal(false);
-});
+function toggleFaq(index) {
+    const item = document.querySelector(`.faq-item[data-faq="${index}"]`);
+    if (!item) return;
 
-// Form submit untuk menambah data fitur baru ke DOM
-newFeatureForm.addEventListener('submit', (e) => {
-  e.preventDefault();
+    const isOpen = item.classList.contains('open');
 
-  const title = document.getElementById('newFeatureTitle').value.trim();
-  const desc = document.getElementById('newFeatureDesc').value.trim();
-  const category = document.getElementById('newFeatureCategory').value;
-  const icon = document.getElementById('newFeatureIcon').value;
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
 
-  if (!title || !desc) return;
-
-  // Warna gradasi acak
-  const gradientList = [
-    'from-emerald-500 to-teal-500',
-    'from-pink-500 to-rose-500',
-    'from-cyan-500 to-blue-500',
-    'from-violet-500 to-purple-500',
-    'from-amber-500 to-yellow-500'
-  ];
-  const randomGradient = gradientList[Math.floor(Math.random() * gradientList.length)];
-
-  const newFeature = {
-    id: Date.now(),
-    title,
-    desc,
-    category,
-    icon,
-    color: randomGradient
-  };
-
-  // Tambahkan ke array
-  featuresData.unshift(newFeature);
-
-  // Render ulang ke DOM
-  renderFeatures(featuresData);
-
-  // Reset tombol filter ke 'Semua'
-  filterButtons[0].click();
-
-  toggleModal(false);
-  showToast('Fitur baru berhasil ditambahkan ke DOM!', 'success');
-});
-
-// ==========================================
-// 6. INTERACTIVE HERO DOM PLAYGROUND
-// ==========================================
-const sampleColors = [
-  { name: 'Indigo Dream', bg: 'from-indigo-500 to-purple-600', icon: 'fa-wand-magic-sparkles' },
-  { name: 'Emerald Forest', bg: 'from-emerald-500 to-teal-600', icon: 'fa-leaf' },
-  { name: 'Sunset Glow', bg: 'from-rose-500 to-orange-500', icon: 'fa-fire' },
-  { name: 'Cyber Neon', bg: 'from-cyan-500 to-blue-600', icon: 'fa-microchip' },
-  { name: 'Golden Sun', bg: 'from-amber-500 to-yellow-500', icon: 'fa-sun' }
-];
-
-const sampleQuotes = [
-  "DOM Manipulation memungkinkan pengalaman web yang sangat cepat dan interaktif!",
-  "Manipulasi state langsung mengubah antarmuka seketika tanpa refresh.",
-  "Event Listener siap merespon setiap klik, ketikan, dan pergerakan kursor.",
-  "Performa murni JavaScript Vanilla sangat ringan dan hemat sumber daya."
-];
-
-let colorIndex = 0;
-
-btnColorChange.addEventListener('click', () => {
-  colorIndex = (colorIndex + 1) % sampleColors.length;
-  const current = sampleColors[colorIndex];
-
-  // Ganti icon class
-  interactiveIcon.className = `fa-solid ${current.icon}`;
-  
-  // Ganti icon wrapper gradient background
-  const iconWrapper = interactiveIcon.parentElement;
-  iconWrapper.className = `w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr ${current.bg} text-white flex items-center justify-center text-2xl shadow-lg transition-all duration-300`;
-
-  // Update status label
-  domStatus.innerText = `Tema diubah ke '${current.name}' (Manipulasi classList & className)`;
-});
-
-btnTextRandom.addEventListener('click', () => {
-  const randomText = sampleQuotes[Math.floor(Math.random() * sampleQuotes.length)];
-  interactiveText.innerText = randomText;
-  
-  // Animasi kedip teks via manipulasi style
-  interactiveText.style.opacity = '0';
-  setTimeout(() => {
-    interactiveText.style.opacity = '1';
-    interactiveText.style.transition = 'opacity 0.3s ease';
-  }, 50);
-
-  domStatus.innerText = `Teks diubah menggunakan innerText property`;
-});
-
-// ==========================================
-// 7. ACCORDION FAQ DOM MANIPULATION
-// ==========================================
-const accordionHeaders = document.querySelectorAll('.accordion-header');
-
-accordionHeaders.forEach(header => {
-  header.addEventListener('click', () => {
-    const body = header.nextElementSibling;
-    const icon = header.querySelector('i');
-
-    const isOpen = !body.classList.contains('hidden');
-
-    // Tutup semua accordion body lainnya
-    document.querySelectorAll('.accordion-body').forEach(b => b.classList.add('hidden'));
-    document.querySelectorAll('.accordion-header i').forEach(i => i.classList.remove('rotate-180'));
-
-    // Toggle current
+    // Toggle clicked
     if (!isOpen) {
-      body.classList.remove('hidden');
-      icon.classList.add('rotate-180');
+        item.classList.add('open');
     }
-  });
-});
-
-// ==========================================
-// 8. CONTACT FORM DYNAMIC VALIDATION & SUBMISSION
-// ==========================================
-contactForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const nameInput = document.getElementById('contactName');
-  const emailInput = document.getElementById('contactEmail');
-  const messageInput = document.getElementById('contactMessage');
-
-  const errorName = document.getElementById('errorName');
-  const errorEmail = document.getElementById('errorEmail');
-  const errorMessage = document.getElementById('errorMessage');
-
-  let isValid = true;
-
-  // 1. Validasi Nama (Minimal 3 karakter)
-  if (nameInput.value.trim().length < 3) {
-    errorName.classList.remove('hidden');
-    nameInput.classList.add('border-red-500', 'focus:ring-red-500');
-    isValid = false;
-  } else {
-    errorName.classList.add('hidden');
-    nameInput.classList.remove('border-red-500', 'focus:ring-red-500');
-  }
-
-  // 2. Validasi Email dengan Regex
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(emailInput.value.trim())) {
-    errorEmail.classList.remove('hidden');
-    emailInput.classList.add('border-red-500', 'focus:ring-red-500');
-    isValid = false;
-  } else {
-    errorEmail.classList.add('hidden');
-    emailInput.classList.remove('border-red-500', 'focus:ring-red-500');
-  }
-
-  // 3. Validasi Pesan (Minimal 10 karakter)
-  if (messageInput.value.trim().length < 10) {
-    errorMessage.classList.remove('hidden');
-    messageInput.classList.add('border-red-500', 'focus:ring-red-500');
-    isValid = false;
-  } else {
-    errorMessage.classList.add('hidden');
-    messageInput.classList.remove('border-red-500', 'focus:ring-red-500');
-  }
-
-  if (!isValid) return;
-
-  // Manipulasi tombol saat proses pengiriman simulasi
-  const submitBtn = document.getElementById('btnSubmitContact');
-  const submitText = document.getElementById('btnSubmitText');
-  const submitIcon = document.getElementById('btnSubmitIcon');
-
-  submitBtn.disabled = true;
-  submitText.innerText = 'Mengirim Pesan...';
-  submitIcon.className = 'fa-solid fa-spinner fa-spin text-xs';
-
-  setTimeout(() => {
-    // Reset Form & Tombol
-    contactForm.reset();
-    submitBtn.disabled = false;
-    submitText.innerText = 'Kirim Pesan Sekarang';
-    submitIcon.className = 'fa-solid fa-paper-plane text-xs';
-
-    // Tampilkan Toast Notifikasi Dinamis
-    showToast(`Terima kasih, ${escapeHtml(nameInput.value.trim())}! Pesan Anda telah terkirim.`, 'success');
-  }, 1000);
-});
-
-// ==========================================
-// 9. DYNAMIC TOAST NOTIFICATION (DOM INJECTION)
-// ==========================================
-/**
- * Membuat notifikasi toast dinamis dan menempelkannya ke dalam DOM
- * @param {string} message - Pesan notifikasi
- * @param {'success'|'info'|'error'} type - Tipe notifikasi
- */
-function showToast(message, type = 'info') {
-  const toast = document.createElement('div');
-  
-  let bgGradient = 'from-slate-900 to-slate-800 text-white';
-  let iconClass = 'fa-circle-info text-blue-400';
-
-  if (type === 'success') {
-    bgGradient = 'from-emerald-600 to-teal-700 text-white';
-    iconClass = 'fa-circle-check text-emerald-200';
-  } else if (type === 'error') {
-    bgGradient = 'from-rose-600 to-red-700 text-white';
-    iconClass = 'fa-circle-exclamation text-rose-200';
-  }
-
-  toast.className = `pointer-events-auto flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-gradient-to-r ${bgGradient} shadow-2xl border border-white/10 text-sm font-medium animate-fadeIn transition-all duration-300`;
-  
-  toast.innerHTML = `
-    <i class="fa-solid ${iconClass} text-base"></i>
-    <span class="flex-grow">${message}</span>
-    <button class="text-white/70 hover:text-white ml-2 transition-colors">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
-  `;
-
-  // Tombol close manual
-  toast.querySelector('button').addEventListener('click', () => {
-    toast.remove();
-  });
-
-  toastContainer.appendChild(toast);
-
-  // Auto remove setelah 3.5 detik
-  setTimeout(() => {
-    toast.style.opacity = '0';
-    toast.style.transform = 'translateY(10px)';
-    setTimeout(() => toast.remove(), 300);
-  }, 3500);
 }
 
-// ==========================================
-// 10. THEME SWITCHER (DARK / LIGHT MODE)
-// ==========================================
-function initTheme() {
-  const savedTheme = localStorage.getItem('techflow_theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+// ══════════════════════
+// STATS ANIMATION
+// ══════════════════════
+let statsAnimated = false;
 
-  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-    document.documentElement.classList.add('dark');
-    themeIcon.className = 'fa-solid fa-sun';
-  } else {
-    document.documentElement.classList.remove('dark');
-    themeIcon.className = 'fa-solid fa-moon';
-  }
+function animateStats() {
+    if (statsAnimated) return;
+
+    const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+    if (statNumbers.length === 0) return;
+
+    statsAnimated = true;
+
+    statNumbers.forEach(el => {
+        const target = parseInt(el.dataset.target);
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+
+        const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            el.textContent = Math.floor(current).toLocaleString('id-ID') + (target >= 100 ? '+' : '');
+        }, 16);
+    });
 }
 
-themeToggleBtn.addEventListener('click', () => {
-  const isDark = document.documentElement.classList.toggle('dark');
-  if (isDark) {
-    themeIcon.className = 'fa-solid fa-sun';
-    localStorage.setItem('techflow_theme', 'dark');
-    showToast('Mode gelap diaktifkan', 'info');
-  } else {
-    themeIcon.className = 'fa-solid fa-moon';
-    localStorage.setItem('techflow_theme', 'light');
-    showToast('Mode terang diaktifkan', 'info');
-  }
-});
+// Intersection Observer for stats
+const statsSection = document.querySelector('.stats-section');
+if (statsSection) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateStats();
+            }
+        });
+    }, { threshold: 0.3 });
 
-// ==========================================
-// 11. MOBILE MENU TOGGLE
-// ==========================================
-function toggleMobileMenu(forceState) {
-  const shouldOpen = forceState !== undefined ? forceState : mobileMenu.classList.contains('hidden');
-  
-  if (shouldOpen) {
-    mobileMenu.classList.remove('hidden');
-    mobileMenuIcon.className = 'fa-solid fa-xmark text-lg';
-  } else {
-    mobileMenu.classList.add('hidden');
-    mobileMenuIcon.className = 'fa-solid fa-bars text-lg';
-  }
+    observer.observe(statsSection);
 }
 
-mobileMenuBtn.addEventListener('click', () => toggleMobileMenu());
+// ══════════════════════
+// TOAST NOTIFICATION
+// ══════════════════════
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMessage');
+    toastMsg.textContent = message;
+    toast.classList.add('show');
 
-// ==========================================
-// 12. ANIMATED STATISTICS COUNTER
-// ==========================================
-let counterStarted = false;
-
-function startCounters() {
-  const counters = document.querySelectorAll('.stat-counter');
-  
-  counters.forEach(counter => {
-    const target = +counter.getAttribute('data-target');
-    let count = 0;
-    const speed = 20;
-    const increment = Math.ceil(target / 40);
-
-    const updateCount = () => {
-      count += increment;
-      if (count < target) {
-        counter.innerText = count;
-        setTimeout(updateCount, speed);
-      } else {
-        counter.innerText = target + (target === 99 ? '%' : '+');
-      }
-    };
-
-    updateCount();
-  });
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
 }
 
-// ==========================================
-// 13. UTILITY HELPER FUNCTIONS
-// ==========================================
-function escapeHtml(str) {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+// ══════════════════════
+// INIT
+// ══════════════════════
+function init() {
+    renderEventCards(EVENTS_DATA);
+    renderEventHub(EVENTS_DATA);
+    renderFAQ();
+
+    // Trigger stats if visible on load
+    setTimeout(animateStats, 1000);
 }
 
-// ==========================================
-// 14. APPLICATION INITIALIZATION
-// ==========================================
-document.addEventListener('DOMContentLoaded', () => {
-  // 1. Inisialisasi tema
-  initTheme();
-
-  // 2. Set tahun otomatis pada footer
-  if (currentYearSpan) {
-    currentYearSpan.innerText = new Date().getFullYear();
-  }
-
-  // 3. Render data fitur awal ke dalam DOM
-  renderFeatures(featuresData);
-
-  // 4. Periksa initial URL Hash untuk SPA routing
-  const initialPage = window.location.hash.replace('#', '') || 'home';
-  navigateTo(initialPage);
-});
+document.addEventListener('DOMContentLoaded', init);
