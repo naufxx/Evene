@@ -25,4 +25,4 @@ Kami membangun Evene sebagai wadah atau "Event Hub" praktis yang mempercepat ber
 Kami memilih subtema **Humanity OS** karena percaya bahwa teknologi harusnya bekerja layaknya "sistem operasi" bagi nilai-nilai kemanusiaan. Teknologi bukan cuma soal baris kode atau hitungan komputer, melainkan alat untuk menggerakkan solidaritas sosial. Di sini, Evene berperan sebagai sistem operasi digital yang menghubungkan niat baik relawan, energi dari komunitas, dan kebutuhan riil di masyarakat. Melalui kolaborasi ini, kami ingin membuktikan bahwa kemajuan teknologi bisa benar-benar dioptimalkan untuk mempermudah aksi kemanusiaan dan menyelesaikan masalah sosial secara nyata.
 
 ## Tautan / Link Deploy Website
-https://link-website-anda-yang-sudah-aktif.com
+https://naufxx.github.io/Evene/
