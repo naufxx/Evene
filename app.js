@@ -1,14 +1,9 @@
-/* ═══════════════════════════════════════════
-   EVENE — App Logic (Vanilla JS SPA)
-   ═══════════════════════════════════════════ */
-
-// ── Event Data (Static JSON) ──
 const EVENTS_DATA = [
     {
         id: 1,
         title: "Aksi Bersih Pantai Losari",
         category: "lingkungan",
-        categoryLabel: "🌿 Lingkungan",
+        categoryLabel: "Lingkungan",
         date: "2026-08-22",
         time: "07:00 - 12:00 WIB",
         location: "Pantai Losari, Makassar",
@@ -18,14 +13,14 @@ const EVENTS_DATA = [
         requirements: ["Usia minimal 16 tahun", "Membawa sarung tangan sendiri (opsional)", "Menggunakan pakaian nyaman & sepatu tertutup", "Siap beraktivitas di bawah terik matahari"],
         volunteers: 23,
         maxVolunteers: 50,
-        icon: "🏖️",
+        icon: "",
         gradient: "linear-gradient(135deg, #6c5ce7, #00cec9)"
     },
     {
         id: 2,
         title: "Mengajar Anak Desa Cerdas",
         category: "pendidikan",
-        categoryLabel: "📚 Pendidikan",
+        categoryLabel: "Pendidikan",
         date: "2026-08-29",
         time: "09:00 - 15:00 WIB",
         location: "SDN 3 Bogor, Jawa Barat",
@@ -35,14 +30,14 @@ const EVENTS_DATA = [
         requirements: ["Minimal mahasiswa semester 3", "Pengalaman mengajar (diutamakan)", "Sabar dan menyukai anak-anak", "Membawa alat tulis dan materi sendiri"],
         volunteers: 15,
         maxVolunteers: 30,
-        icon: "📖",
+        icon: "",
         gradient: "linear-gradient(135deg, #e17055, #fdcb6e)"
     },
     {
         id: 3,
         title: "Donor Darah Massal PMI",
         category: "kesehatan",
-        categoryLabel: "❤️ Kesehatan",
+        categoryLabel: "Kesehatan",
         date: "2026-09-05",
         time: "08:00 - 16:00 WIB",
         location: "GOR Soemantri, Jakarta Selatan",
@@ -52,179 +47,37 @@ const EVENTS_DATA = [
         requirements: ["Usia 17-60 tahun", "Berat badan minimal 45 kg", "Tidak sedang minum obat tertentu", "Tidur cukup minimal 6 jam sebelum donor"],
         volunteers: 45,
         maxVolunteers: 100,
-        icon: "🩸",
+        icon: "",
         gradient: "linear-gradient(135deg, #e17055, #e056a0)"
-    },
-    {
-        id: 4,
-        title: "Hackathon for Social Good",
-        category: "teknologi",
-        categoryLabel: "💻 Teknologi",
-        date: "2026-09-12",
-        time: "08:00 - 22:00 WIB",
-        location: "Gedung Inovasi, Bandung",
-        mapQuery: "Gedung+Inovasi+Bandung",
-        organizer: "Tech Community Bandung",
-        description: "Hackathon 14 jam untuk menciptakan solusi teknologi yang mengatasi masalah sosial. Tema: Aksesibilitas & Inklusi. Hadiah total Rp 50 juta untuk 3 tim terbaik.",
-        requirements: ["Tim terdiri dari 3-5 orang", "Membawa laptop masing-masing", "Dasar pemrograman (any language)", "Ide kreatif untuk dampak sosial"],
-        volunteers: 60,
-        maxVolunteers: 80,
-        icon: "💻",
-        gradient: "linear-gradient(135deg, #6c5ce7, #a55eea)"
-    },
-    {
-        id: 5,
-        title: "Bazar Ramah Disabilitas",
-        category: "sosial",
-        categoryLabel: "🤝 Sosial",
-        date: "2026-09-20",
-        time: "10:00 - 17:00 WIB",
-        location: "Taman Menteng, Jakarta Pusat",
-        mapQuery: "Taman+Menteng+Jakarta+Pusat",
-        organizer: "Yayasan Peduli Difabel",
-        description: "Bazar inklusif yang menjual produk karya teman-teman disabilitas. Relawan membantu setup booth, pendampingan penjual, dan edukasi pengunjung tentang aksesibilitas.",
-        requirements: ["Terbuka untuk semua usia", "Bersedia berdiri 4-6 jam", "Ramah dan komunikatif", "Pengalaman event management (plus)"],
-        volunteers: 18,
-        maxVolunteers: 40,
-        icon: "🤝",
-        gradient: "linear-gradient(135deg, #00b894, #00cec9)"
-    },
-    {
-        id: 6,
-        title: "Tanam 1000 Pohon Mangrove",
-        category: "lingkungan",
-        categoryLabel: "🌿 Lingkungan",
-        date: "2026-10-03",
-        time: "06:00 - 13:00 WIB",
-        location: "Pantai Indah Kapuk, Jakarta Utara",
-        mapQuery: "Pantai+Indah+Kapuk+Jakarta+Utara",
-        organizer: "Go Green Indonesia",
-        description: "Mari tanam 1000 pohon mangrove untuk melindungi pesisir dari abrasi dan menjaga ekosistem laut. Setiap relawan akan menanam minimal 5 bibit mangrove.",
-        requirements: ["Usia minimal 15 tahun", "Membawa pakaian ganti", "Siap kotor-kotoran di lumpur", "Tidak takut air payau"],
-        volunteers: 35,
-        maxVolunteers: 120,
-        icon: "🌳",
-        gradient: "linear-gradient(135deg, #00b894, #55efc4)"
-    },
-    {
-        id: 7,
-        title: "Workshop Literasi Digital Lansia",
-        category: "pendidikan",
-        categoryLabel: "📚 Pendidikan",
-        date: "2026-10-10",
-        time: "13:00 - 16:00 WIB",
-        location: "Balai Kelurahan Menteng, Jakarta",
-        mapQuery: "Balai+Kelurahan+Menteng+Jakarta",
-        organizer: "Digital Grandparents ID",
-        description: "Ajarkan kakek-nenek menggunakan smartphone, media sosial, dan menghindari hoax. Butuh relawan yang sabar dan pandai berkomunikasi dengan lansia.",
-        requirements: ["Sabar dan telaten", "Memahami smartphone Android/iOS", "Bisa berbicara pelan dan jelas", "Pengalaman mengajar lansia (plus)"],
-        volunteers: 8,
-        maxVolunteers: 20,
-        icon: "👴",
-        gradient: "linear-gradient(135deg, #fdcb6e, #e17055)"
-    },
-    {
-        id: 8,
-        title: "Festival Seni Anak Jalanan",
-        category: "sosial",
-        categoryLabel: "🤝 Sosial",
-        date: "2026-10-17",
-        time: "09:00 - 17:00 WIB",
-        location: "Taman Ismail Marzuki, Jakarta",
-        mapQuery: "Taman+Ismail+Marzuki+Jakarta",
-        organizer: "Sanggar Anak Langit",
-        description: "Festival seni yang menampilkan karya dan bakat anak-anak jalanan. Relawan membantu pendampingan, setup panggung, dokumentasi, dan penggalangan dana.",
-        requirements: ["Terbuka untuk semua usia", "Minat di bidang seni/budaya", "Bisa fotografi/videografi (plus)", "Bersedia full-day"],
-        volunteers: 28,
-        maxVolunteers: 50,
-        icon: "🎨",
-        gradient: "linear-gradient(135deg, #a55eea, #e056a0)"
-    },
-    {
-        id: 9,
-        title: "Pemeriksaan Kesehatan Gratis",
-        category: "kesehatan",
-        categoryLabel: "❤️ Kesehatan",
-        date: "2026-10-24",
-        time: "07:00 - 14:00 WIB",
-        location: "Puskesmas Tebet, Jakarta Selatan",
-        mapQuery: "Puskesmas+Tebet+Jakarta+Selatan",
-        organizer: "Dokter Tanpa Batas Indonesia",
-        description: "Kegiatan pemeriksaan kesehatan gratis untuk warga kurang mampu meliputi cek tensi, gula darah, kolesterol, dan konsultasi dokter umum.",
-        requirements: ["Mahasiswa kedokteran/keperawatan", "Atau relawan non-medis untuk administrasi", "Ramah dan teliti", "Bersedia bekerja dalam tim"],
-        volunteers: 12,
-        maxVolunteers: 35,
-        icon: "🏥",
-        gradient: "linear-gradient(135deg, #74b9ff, #6c5ce7)"
     }
 ];
 
-const FAQ_DATA = [
-    {
-        q: "Bagaimana cara mendaftar sebagai relawan?",
-        a: "Cukup buka halaman Event Hub, pilih event yang kamu minati, klik tombol 'Daftar Sekarang' dan isi form pendaftaran. Kami akan menghubungi kamu via email untuk konfirmasi."
-    },
-    {
-        q: "Apakah ada biaya untuk bergabung?",
-        a: "Tidak! Semua event di Evene 100% gratis untuk relawan. Beberapa event bahkan menyediakan konsumsi, transportasi, dan sertifikat."
-    },
-    {
-        q: "Bagaimana cara mengajukan event baru?",
-        a: "Buka halaman Event Hub, scroll ke bawah hingga menemukan form 'Ajukan Event Baru'. Isi detail event kamu dan tim kami akan meninjau dalam 2-3 hari kerja."
-    },
-    {
-        q: "Apakah saya bisa ikut event di luar kota saya?",
-        a: "Tentu! Kamu bisa ikut event di mana saja. Namun, transportasi dan akomodasi menjadi tanggung jawab masing-masing relawan kecuali disebutkan lain oleh penyelenggara."
-    },
-    {
-        q: "Apakah ada sertifikat setelah mengikuti event?",
-        a: "Sebagian besar event menyediakan sertifikat partisipasi atau e-certificate. Informasi ini tercantum di detail setiap event."
-    },
-    {
-        q: "Bagaimana jika saya ingin membatalkan pendaftaran?",
-        a: "Hubungi kami melalui halaman Contact atau email ke hello@evene.id minimal 3 hari sebelum event. Pembatalan mendadak bisa mempengaruhi peluang kamu di event berikutnya."
-    }
-];
-
-// ── Month Names (Indonesian) ──
 const MONTHS_ID = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
 const MONTHS_FULL = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
-// ══════════════════════
-// NAVIGATION (SPA)
-// ══════════════════════
 function navigateTo(pageId) {
-    // Hide all pages
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
 
-    // Show target page
     const target = document.getElementById(pageId);
     if (target) {
         target.classList.add('active');
-        // Re-trigger animation
         target.style.animation = 'none';
-        target.offsetHeight; // reflow
+        target.offsetHeight;
         target.style.animation = '';
     }
 
-    // Update nav active state
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.toggle('active', link.dataset.nav === pageId);
     });
 
-    // Close mobile menu
     closeMobileMenu();
-
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Trigger stats animation if home
     if (pageId === 'home') {
         setTimeout(animateStats, 500);
     }
 }
 
-// Handle all navigation clicks (data-nav)
 document.addEventListener('click', (e) => {
     const navEl = e.target.closest('[data-nav]');
     if (navEl) {
@@ -233,9 +86,6 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// ══════════════════════
-// MOBILE MENU
-// ══════════════════════
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 
@@ -249,17 +99,11 @@ function closeMobileMenu() {
     mobileMenu.classList.remove('open');
 }
 
-// ══════════════════════
-// NAVBAR SCROLL EFFECT
-// ══════════════════════
 window.addEventListener('scroll', () => {
     const navbar = document.getElementById('navbar');
     navbar.classList.toggle('scrolled', window.scrollY > 50);
 });
 
-// ══════════════════════
-// RENDER EVENT CARDS (Home)
-// ══════════════════════
 function renderEventCards(events) {
     const grid = document.getElementById('eventGrid');
     if (!grid) return;
@@ -267,7 +111,7 @@ function renderEventCards(events) {
     if (events.length === 0) {
         grid.innerHTML = `
             <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+                <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
                 <h3 style="margin-bottom: 0.5rem;">Tidak ada event ditemukan</h3>
                 <p style="color: var(--text-secondary);">Coba ubah kata kunci atau filter pencarian</p>
             </div>
@@ -294,9 +138,9 @@ function renderEventCards(events) {
                 <div class="event-card-body">
                     <h3>${event.title}</h3>
                     <div class="event-card-meta">
-                        <span>📍 ${event.location}</span>
-                        <span>🕐 ${event.time}</span>
-                        <span>🏢 ${event.organizer}</span>
+                        <span>${event.location}</span>
+                        <span>${event.time}</span>
+                        <span>${event.organizer}</span>
                     </div>
                     <div class="event-card-footer">
                         <span class="event-card-volunteers">
@@ -310,9 +154,6 @@ function renderEventCards(events) {
     }).join('');
 }
 
-// ══════════════════════
-// RENDER EVENT HUB (Full)
-// ══════════════════════
 function renderEventHub(events) {
     const grid = document.getElementById('eventHubGrid');
     if (!grid) return;
@@ -326,34 +167,30 @@ function renderEventHub(events) {
             <div class="event-hub-card" style="animation-delay: ${i * 0.08}s">
                 <div class="event-hub-card-header">
                     <div>
-                        <h3>${event.icon} ${event.title}</h3>
+                        <h3>${event.title}</h3>
                         <span class="badge" style="margin-top: 0.5rem;">${event.categoryLabel}</span>
                     </div>
                 </div>
                 <div class="event-hub-card-body">
                     <p>${event.description}</p>
                     <div class="event-hub-meta">
-                        <span class="event-hub-meta-item">📅 ${dateStr}</span>
-                        <span class="event-hub-meta-item">🕐 ${event.time}</span>
-                        <span class="event-hub-meta-item">📍 ${event.location}</span>
-                        <span class="event-hub-meta-item">🏢 ${event.organizer}</span>
-                        <span class="event-hub-meta-item">👥 ${event.volunteers}/${event.maxVolunteers} (${pct}%)</span>
+                        <span class="event-hub-meta-item">${dateStr}</span>
+                        <span class="event-hub-meta-item">${event.time}</span>
+                        <span class="event-hub-meta-item">${event.location}</span>
+                        <span class="event-hub-meta-item">${event.organizer}</span>
+                        <span class="event-hub-meta-item">${event.volunteers}/${event.maxVolunteers} (${pct}%)</span>
                     </div>
                 </div>
                 <div class="event-hub-card-actions">
                     <button class="btn btn-primary" onclick="openEventDetail(${event.id})">Lihat Detail</button>
                     <button class="btn btn-outline" onclick="openRsvpModal(${event.id})">Daftar / RSVP</button>
-                    <button class="btn btn-glass" onclick="addToCalendar(${event.id})">📅 Kalender</button>
-                    <button class="btn btn-glass" onclick="shareToWhatsApp(${event.id})">💬 Share WA</button>
+                    <button class="btn btn-glass" onclick="addToCalendar(${event.id})">Kalender</button>
                 </div>
             </div>
         `;
     }).join('');
 }
 
-// ══════════════════════
-// SEARCH & FILTER
-// ══════════════════════
 let currentFilter = 'all';
 let currentSearch = '';
 
@@ -378,7 +215,6 @@ function filterAndSearch() {
     renderEventCards(filtered);
 }
 
-// Filter pills
 document.querySelectorAll('.pill[data-filter]').forEach(pill => {
     pill.addEventListener('click', () => {
         document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
@@ -388,7 +224,6 @@ document.querySelectorAll('.pill[data-filter]').forEach(pill => {
     });
 });
 
-// Search input
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 
@@ -408,9 +243,6 @@ searchInput.addEventListener('keydown', (e) => {
     }
 });
 
-// ══════════════════════
-// EVENT DETAIL MODAL
-// ══════════════════════
 function openEventDetail(eventId) {
     const event = EVENTS_DATA.find(e => e.id === eventId);
     if (!event) return;
@@ -430,27 +262,27 @@ function openEventDetail(eventId) {
 
         <div class="modal-event-info">
             <div class="modal-event-info-item">
-                <strong>📅 Tanggal</strong>
+                <strong>Tanggal</strong>
                 <span>${dateStr}</span>
             </div>
             <div class="modal-event-info-item">
-                <strong>🕐 Waktu</strong>
+                <strong>Waktu</strong>
                 <span>${event.time}</span>
             </div>
             <div class="modal-event-info-item">
-                <strong>📍 Lokasi</strong>
+                <strong>Lokasi</strong>
                 <span>${event.location}</span>
             </div>
             <div class="modal-event-info-item">
-                <strong>🏢 Penyelenggara</strong>
+                <strong>Penyelenggara</strong>
                 <span>${event.organizer}</span>
             </div>
             <div class="modal-event-info-item">
-                <strong>👥 Relawan</strong>
+                <strong>Relawan</strong>
                 <span>${event.volunteers} / ${event.maxVolunteers} (${pct}%)</span>
             </div>
             <div class="modal-event-info-item">
-                <strong>📊 Status</strong>
+                <strong>Status</strong>
                 <span style="color: ${pct >= 80 ? 'var(--warning)' : 'var(--success)'}">
                     ${pct >= 100 ? 'Penuh' : pct >= 80 ? 'Hampir Penuh' : 'Tersedia'}
                 </span>
@@ -458,7 +290,7 @@ function openEventDetail(eventId) {
         </div>
 
         <div class="modal-event-requirements">
-            <h4>📋 Syarat & Ketentuan</h4>
+            <h4>Syarat & Ketentuan</h4>
             <ul>
                 ${event.requirements.map(r => `<li>${r}</li>`).join('')}
             </ul>
@@ -476,13 +308,13 @@ function openEventDetail(eventId) {
 
         <div class="modal-event-actions">
             <button class="btn btn-primary" onclick="closeModal('eventModal'); openRsvpModal(${event.id})">
-                📝 Daftar Sekarang
+                Daftar Sekarang
             </button>
             <button class="btn btn-outline" onclick="addToCalendar(${event.id})">
-                📅 Tambah ke Kalender
+                Tambah ke Kalender
             </button>
             <button class="btn btn-glass" onclick="shareToWhatsApp(${event.id})">
-                💬 Share WhatsApp
+                Share WhatsApp
             </button>
         </div>
     `;
@@ -491,9 +323,6 @@ function openEventDetail(eventId) {
     document.body.style.overflow = 'hidden';
 }
 
-// ══════════════════════
-// RSVP MODAL
-// ══════════════════════
 function openRsvpModal(eventId) {
     const event = EVENTS_DATA.find(e => e.id === eventId);
     if (!event) return;
@@ -501,7 +330,6 @@ function openRsvpModal(eventId) {
     document.getElementById('rsvpEventName').textContent = event.title;
     document.getElementById('rsvpEventId').value = eventId;
 
-    // Reset form
     document.getElementById('rsvpForm').style.display = 'flex';
     document.getElementById('rsvpSuccess').style.display = 'none';
     document.getElementById('rsvpForm').reset();
@@ -511,9 +339,6 @@ function openRsvpModal(eventId) {
     document.body.style.overflow = 'hidden';
 }
 
-// ══════════════════════
-// CLOSE MODALS
-// ══════════════════════
 function closeModal(modalId) {
     document.getElementById(modalId).classList.remove('open');
     document.body.style.overflow = '';
@@ -522,7 +347,6 @@ function closeModal(modalId) {
 document.getElementById('modalClose').addEventListener('click', () => closeModal('eventModal'));
 document.getElementById('rsvpModalClose').addEventListener('click', () => closeModal('rsvpModal'));
 
-// Close on overlay click
 document.querySelectorAll('.modal-overlay').forEach(overlay => {
     overlay.addEventListener('click', (e) => {
         if (e.target === overlay) {
@@ -531,16 +355,12 @@ document.querySelectorAll('.modal-overlay').forEach(overlay => {
     });
 });
 
-// Close on Escape
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id));
     }
 });
 
-// ══════════════════════
-// CALENDAR & SHARE
-// ══════════════════════
 function addToCalendar(eventId) {
     const event = EVENTS_DATA.find(e => e.id === eventId);
     if (!event) return;
@@ -553,7 +373,7 @@ function addToCalendar(eventId) {
 
     const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dateStr}/${dateStr}&details=${details}&location=${location}`;
     window.open(url, '_blank');
-    showToast('📅 Membuka Google Calendar...');
+    showToast('Membuka Google Calendar...');
 }
 
 function shareToWhatsApp(eventId) {
@@ -563,22 +383,19 @@ function shareToWhatsApp(eventId) {
     const d = new Date(event.date);
     const dateStr = `${d.getDate()} ${MONTHS_FULL[d.getMonth()]} ${d.getFullYear()}`;
     const text = encodeURIComponent(
-        `🎯 *${event.title}*\n\n` +
-        `📅 ${dateStr}\n` +
-        `🕐 ${event.time}\n` +
-        `📍 ${event.location}\n` +
-        `🏢 ${event.organizer}\n\n` +
+        `*${event.title}*\n\n` +
+        `${dateStr}\n` +
+        `${event.time}\n` +
+        `${event.location}\n` +
+        `${event.organizer}\n\n` +
         `${event.description.slice(0, 150)}...\n\n` +
-        `👥 ${event.volunteers}/${event.maxVolunteers} relawan sudah mendaftar!\n\n` +
-        `Daftar sekarang di Evene! ⚡`
+        `${event.volunteers}/${event.maxVolunteers} relawan sudah mendaftar!\n\n` +
+        `Daftar sekarang di Evene!`
     );
     window.open(`https://wa.me/?text=${text}`, '_blank');
-    showToast('💬 Membuka WhatsApp...');
+    showToast('Membuka WhatsApp...');
 }
 
-// ══════════════════════
-// FORM VALIDATION
-// ══════════════════════
 function validateField(inputId, errorId, rules) {
     const input = document.getElementById(inputId);
     const errorEl = document.getElementById(errorId);
@@ -621,7 +438,6 @@ function clearFormErrors(formId) {
     form.querySelectorAll('.form-error').forEach(el => el.textContent = '');
 }
 
-// ── RSVP Form Submit ──
 document.getElementById('rsvpForm').addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -641,11 +457,10 @@ document.getElementById('rsvpForm').addEventListener('submit', (e) => {
     if (nameOk && emailOk && phoneOk) {
         document.getElementById('rsvpForm').style.display = 'none';
         document.getElementById('rsvpSuccess').style.display = 'block';
-        showToast('🎉 Pendaftaran berhasil!');
+        showToast('Pendaftaran berhasil!');
     }
 });
 
-// ── Contact Form Submit ──
 document.getElementById('contactForm').addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -667,11 +482,10 @@ document.getElementById('contactForm').addEventListener('submit', (e) => {
     if (nameOk && emailOk && subjectOk && messageOk) {
         document.getElementById('contactForm').style.display = 'none';
         document.getElementById('contactSuccess').style.display = 'block';
-        showToast('📬 Pesan berhasil terkirim!');
+        showToast('Pesan berhasil terkirim!');
     }
 });
 
-// ── Submit Event Form ──
 document.getElementById('submitEventForm').addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -693,13 +507,10 @@ document.getElementById('submitEventForm').addEventListener('submit', (e) => {
     if (allOk) {
         document.getElementById('submitEventForm').style.display = 'none';
         document.getElementById('submitEventSuccess').style.display = 'block';
-        showToast('✅ Event berhasil diajukan!');
+        showToast('Event berhasil diajukan!');
     }
 });
 
-// ══════════════════════
-// FAQ ACCORDION
-// ══════════════════════
 function renderFAQ() {
     const list = document.getElementById('faqList');
     if (!list) return;
@@ -723,18 +534,13 @@ function toggleFaq(index) {
 
     const isOpen = item.classList.contains('open');
 
-    // Close all
     document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
 
-    // Toggle clicked
     if (!isOpen) {
         item.classList.add('open');
     }
 }
 
-// ══════════════════════
-// STATS ANIMATION
-// ══════════════════════
 let statsAnimated = false;
 
 function animateStats() {
@@ -762,7 +568,6 @@ function animateStats() {
     });
 }
 
-// Intersection Observer for stats
 const statsSection = document.querySelector('.stats-section');
 if (statsSection) {
     const observer = new IntersectionObserver((entries) => {
@@ -776,9 +581,6 @@ if (statsSection) {
     observer.observe(statsSection);
 }
 
-// ══════════════════════
-// TOAST NOTIFICATION
-// ══════════════════════
 function showToast(message) {
     const toast = document.getElementById('toast');
     const toastMsg = document.getElementById('toastMessage');
@@ -790,15 +592,10 @@ function showToast(message) {
     }, 3000);
 }
 
-// ══════════════════════
-// INIT
-// ══════════════════════
 function init() {
     renderEventCards(EVENTS_DATA);
     renderEventHub(EVENTS_DATA);
     renderFAQ();
-
-    // Trigger stats if visible on load
     setTimeout(animateStats, 1000);
 }
 
