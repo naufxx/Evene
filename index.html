@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evene — Platform Event & Relawan Komunitas</title>
-    <meta name="description" content="Temukan event sosial, daftar jadi relawan, dan buat dampak nyata bersama komunitas di sekitarmu.">
+    <meta name="description"
+        content="Temukan event sosial, daftar jadi relawan, dan buat dampak nyata bersama komunitas di sekitarmu.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <!-- ═══════════ NAVBAR ═══════════ -->
     <header id="navbar">
         <div class="nav-container">
             <a href="#home" class="logo" data-nav="home">
-                <span class="logo-icon">⚡</span>
+                <span class="logo-icon"></span>
                 <span class="logo-text">Evene</span>
             </a>
             <nav>
@@ -33,7 +36,6 @@
         </div>
     </header>
 
-    <!-- ═══════════ MOBILE MENU ═══════════ -->
     <div class="mobile-menu" id="mobileMenu">
         <ul>
             <li><a href="#home" data-nav="home">Home</a></li>
@@ -44,14 +46,13 @@
     </div>
 
     <main id="app">
-        <!-- ═══════════ HOME ═══════════ -->
         <section id="home" class="page active">
-            <!-- Hero -->
             <div class="hero">
                 <div class="hero-content">
                     <span class="badge hero-badge">Event & komunitas aktif</span>
                     <h1>Temukan Event <br> Jadilah Relawan Selanjutnya</h1>
-                    <p class="hero-desc">Ikuti event, temukan komunitas, dan mulai langkah baru bersama orang-orang yang punya semangat yang sama.</p>
+                    <p class="hero-desc">Ikuti event, temukan komunitas, dan mulai langkah baru bersama orang-orang yang
+                        punya semangat yang sama.</p>
                     <div class="hero-buttons">
                         <a href="#events" class="btn btn-primary" data-nav="events">Lihat Event</a>
                         <a href="#about" class="btn btn-outline" data-nav="about">Tentang Kami</a>
@@ -59,118 +60,110 @@
                 </div>
             </div>
 
-            <!-- Search & Filter -->
             <div class="search-section">
                 <div class="search-bar">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" id="searchInput" placeholder="Cari event berdasarkan nama, lokasi, atau kategori..." autocomplete="off">
+                    <span class="search-icon"></span>
+                    <input type="text" id="searchInput"
+                        placeholder="Cari event berdasarkan nama, lokasi, atau kategori..." autocomplete="off">
                     <button class="btn btn-primary btn-sm" id="searchBtn">Cari</button>
                 </div>
                 <div class="filter-pills">
                     <button class="pill active" data-filter="all">Semua</button>
-                    <button class="pill" data-filter="lingkungan">🌿 Lingkungan</button>
-                    <button class="pill" data-filter="pendidikan">📚 Pendidikan</button>
-                    <button class="pill" data-filter="kesehatan">❤️ Kesehatan</button>
-                    <button class="pill" data-filter="sosial">🤝 Sosial</button>
-                    <button class="pill" data-filter="teknologi">💻 Teknologi</button>
+                    <button class="pill" data-filter="lingkungan">Lingkungan</button>
+                    <button class="pill" data-filter="pendidikan">Pendidikan</button>
+                    <button class="pill" data-filter="kesehatan">Kesehatan</button>
+                    <button class="pill" data-filter="sosial">Sosial</button>
+                    <button class="pill" data-filter="teknologi">Teknologi</button>
                 </div>
             </div>
 
-            <!-- Event Grid -->
             <div class="section-header">
                 <h2>Event <span class="gradient-text">Terpopuler</span></h2>
                 <p>Event yang paling banyak diminati komunitas</p>
             </div>
             <div class="event-grid" id="eventGrid">
-                <!-- Rendered by JS -->
             </div>
 
-            <!-- Stats -->
             <div class="stats-section">
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-number" data-target="156">0</div>
                         <div class="stat-label">Total Event</div>
-                        <div class="stat-icon">📅</div>
+                        <div class="stat-icon"></div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number" data-target="2480">0</div>
                         <div class="stat-label">Relawan Aktif</div>
-                        <div class="stat-icon">🙋</div>
+                        <div class="stat-icon"></div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number" data-target="48">0</div>
                         <div class="stat-label">Kota Terjangkau</div>
-                        <div class="stat-icon">🏙️</div>
+                        <div class="stat-icon"></div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number" data-target="12500">0</div>
                         <div class="stat-label">Jam Kontribusi</div>
-                        <div class="stat-icon">⏱️</div>
+                        <div class="stat-icon"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ═══════════ ABOUT ═══════════ -->
         <section id="about" class="page">
             <div class="page-header">
                 <span class="badge">Tentang Kami</span>
                 <h1>Membangun Komunitas <span class="gradient-text">Berdampak</span></h1>
-                <p>Evene hadir sebagai jembatan antara individu yang ingin berkontribusi dengan event-event sosial yang membutuhkan relawan.</p>
+                <p>Evene hadir sebagai jembatan antara individu yang ingin berkontribusi dengan event-event sosial yang
+                    membutuhkan relawan.</p>
             </div>
 
-            <!-- Mission -->
             <div class="about-grid">
                 <div class="about-card glass-card">
-                    <div class="about-icon">🎯</div>
+                    <div class="about-icon"></div>
                     <h3>Misi Kami</h3>
-                    <p>Menghubungkan ribuan relawan dengan ratusan event sosial di seluruh Indonesia, menciptakan dampak positif yang berkelanjutan.</p>
+                    <p>Menghubungkan ribuan relawan dengan ratusan event sosial di seluruh Indonesia, menciptakan dampak
+                        positif yang berkelanjutan.</p>
                 </div>
                 <div class="about-card glass-card">
-                    <div class="about-icon">👁️</div>
+                    <div class="about-icon"></div>
                     <h3>Visi Kami</h3>
-                    <p>Menjadi platform #1 di Indonesia untuk kolaborasi komunitas dan kerelawanan, di mana setiap orang bisa berkontribusi.</p>
+                    <p>Menjadi platform #1 di Indonesia untuk kolaborasi komunitas dan kerelawanan, di mana setiap orang
+                        bisa berkontribusi.</p>
                 </div>
                 <div class="about-card glass-card">
-                    <div class="about-icon">💡</div>
+                    <div class="about-icon"></div>
                     <h3>Nilai Kami</h3>
-                    <p>Transparansi, inklusivitas, dan kolaborasi. Kami percaya bahwa perubahan besar dimulai dari langkah kecil bersama.</p>
+                    <p>Transparansi, inklusivitas, dan kolaborasi. Kami percaya bahwa perubahan besar dimulai dari
+                        langkah kecil bersama.</p>
                 </div>
             </div>
 
-            <!-- Team -->
             <div class="section-header">
                 <h2>Tim <span class="gradient-text">Pengelola</span></h2>
                 <p>Orang-orang di balik platform Evene</p>
             </div>
             <div class="team-grid">
                 <div class="team-card glass-card">
-                    <div class="team-avatar">👨‍💻</div>
                     <h4>Muhammad Fadhil Santoso</h4>
                     <span class="team-role"></span>
-                    
                 </div>
                 <div class="team-card glass-card">
-                    <div class="team-avatar">👨‍💻</div>
                     <h4>Hafiz Naufal Pramudya Susanto</h4>
                     <span class="team-role"></span>
-                    
                 </div>
-                
             </div>
 
-            <!-- Testimonials -->
             <div class="section-header">
                 <h2>Kata <span class="gradient-text">Mereka</span></h2>
                 <p>Testimoni dari relawan yang sudah bergabung</p>
             </div>
             <div class="testimonials-grid">
                 <div class="testimonial-card glass-card">
-                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                    <p>"Evene membantu saya menemukan komunitas yang tepat. Sekarang saya rutin ikut aksi bersih pantai setiap bulan!"</p>
+                    <div class="testimonial-stars"></div>
+                    <p>"Evene membantu saya menemukan komunitas yang tepat. Sekarang saya rutin ikut aksi bersih pantai
+                        setiap bulan!"</p>
                     <div class="testimonial-author">
-                        <div class="testimonial-avatar">🧑</div>
                         <div>
                             <strong>Rizky Hidayat</strong>
                             <span>Relawan Lingkungan</span>
@@ -178,10 +171,10 @@
                     </div>
                 </div>
                 <div class="testimonial-card glass-card">
-                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                    <p>"Platform yang sangat user-friendly! Saya bisa mengajukan event dan langsung mendapat relawan dalam hitungan hari."</p>
+                    <div class="testimonial-stars"></div>
+                    <p>"Platform yang sangat user-friendly! Saya bisa mengajukan event dan langsung mendapat relawan
+                        dalam hitungan hari."</p>
                     <div class="testimonial-author">
-                        <div class="testimonial-avatar">👩</div>
                         <div>
                             <strong>Fitri Anggraini</strong>
                             <span>Penyelenggara Event</span>
@@ -189,20 +182,17 @@
                     </div>
                 </div>
                 <div class="testimonial-card glass-card">
-                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                    <p>"Sebagai mahasiswa, Evene memberi saya kesempatan untuk belajar sekaligus berkontribusi. Sangat recommended!"</p>
+                    <div class="testimonial-stars"></div>
+                    <p>"Sebagai mahasiswa, Evene memberi saya kesempatan untuk belajar sekaligus berkontribusi. Sangat
+                        recommended!"</p>
                     <div class="testimonial-author">
-                        <div class="testimonial-avatar">👨</div>
-                        <div>
-                            <strong>Dimas Saputra</strong>
-                            <span>Relawan Pendidikan</span>
-                        </div>
+                        <strong>Dimas Saputra</strong>
+                        <span>Relawan Pendidikan</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ═══════════ EVENT HUB ═══════════ -->
         <section id="events" class="page">
             <div class="page-header">
                 <span class="badge">Event Hub</span>
@@ -210,55 +200,51 @@
                 <p>Jelajahi berbagai event sosial dan daftar sebagai relawan</p>
             </div>
 
-            <!-- Event List (full detail) -->
             <div class="event-hub-grid" id="eventHubGrid">
-                <!-- Rendered by JS -->
             </div>
 
-            <!-- Event Detail Modal -->
             <div class="modal-overlay" id="eventModal">
                 <div class="modal glass-card">
                     <button class="modal-close" id="modalClose">✕</button>
                     <div id="modalContent">
-                        <!-- Rendered by JS -->
                     </div>
                 </div>
             </div>
 
-            <!-- RSVP Modal -->
             <div class="modal-overlay" id="rsvpModal">
                 <div class="modal glass-card modal-sm">
                     <button class="modal-close" id="rsvpModalClose">✕</button>
                     <div class="modal-header">
-                        <div class="modal-icon">📝</div>
+                        <div class="modal-icon"></div>
                         <h2>Form Pendaftaran</h2>
                         <p id="rsvpEventName"></p>
                     </div>
                     <form id="rsvpForm" class="form">
                         <input type="hidden" id="rsvpEventId">
                         <div class="form-group">
-                            <label for="rsvpName">Nama Lengkap *</label>
+                            <label for="rsvpName">Nama Lengkap</label>
                             <input type="text" id="rsvpName" placeholder="Masukkan nama lengkap" required>
                             <span class="form-error" id="rsvpNameError"></span>
                         </div>
                         <div class="form-group">
-                            <label for="rsvpEmail">Email *</label>
+                            <label for="rsvpEmail">Email</label>
                             <input type="email" id="rsvpEmail" placeholder="email@contoh.com" required>
                             <span class="form-error" id="rsvpEmailError"></span>
                         </div>
                         <div class="form-group">
-                            <label for="rsvpPhone">No. WhatsApp *</label>
+                            <label for="rsvpPhone">No. WhatsApp</label>
                             <input type="tel" id="rsvpPhone" placeholder="08xxxxxxxxxx" required>
                             <span class="form-error" id="rsvpPhoneError"></span>
                         </div>
                         <div class="form-group">
                             <label for="rsvpMotivation">Motivasi (opsional)</label>
-                            <textarea id="rsvpMotivation" rows="3" placeholder="Ceritakan alasan kamu ingin bergabung..."></textarea>
+                            <textarea id="rsvpMotivation" rows="3"
+                                placeholder="Ceritakan alasan kamu ingin bergabung..."></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-full">Daftar Sekarang 🚀</button>
+                        <button type="submit" class="btn btn-primary btn-full">Daftar Sekarang</button>
                     </form>
                     <div id="rsvpSuccess" class="success-message" style="display:none;">
-                        <div class="success-icon">🎉</div>
+                        <div class="success-icon"></div>
                         <h3>Pendaftaran Berhasil!</h3>
                         <p>Terima kasih telah mendaftar. Kami akan menghubungi kamu melalui email.</p>
                         <button class="btn btn-outline" onclick="closeModal('rsvpModal')">Tutup</button>
@@ -266,76 +252,81 @@
                 </div>
             </div>
 
-            <!-- Submit Event Section -->
             <div class="submit-event-section">
                 <div class="glass-card submit-event-card">
                     <div class="submit-event-header">
-                        <div class="submit-event-icon">🚀</div>
+                        <div class="submit-event-icon"></div>
                         <h2>Ajukan Event Baru</h2>
-                        <p>Punya ide event untuk komunitas? Ajukan melalui form di bawah dan tim kami akan meninjaunya.</p>
+                        <p>Punya ide event untuk komunitas? Ajukan melalui form di bawah dan tim kami akan meninjaunya.
+                        </p>
                     </div>
                     <form id="submitEventForm" class="form">
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="eventTitle">Nama Event *</label>
+                                <label for="eventTitle">Nama Event</label>
                                 <input type="text" id="eventTitle" placeholder="Nama event kamu" required>
                                 <span class="form-error" id="eventTitleError"></span>
                             </div>
                             <div class="form-group">
-                                <label for="eventCategory">Kategori *</label>
+                                <label for="eventCategory">Kategori</label>
                                 <select id="eventCategory" required>
                                     <option value="">Pilih kategori</option>
-                                    <option value="lingkungan">🌿 Lingkungan</option>
-                                    <option value="pendidikan">📚 Pendidikan</option>
-                                    <option value="kesehatan">❤️ Kesehatan</option>
-                                    <option value="sosial">🤝 Sosial</option>
-                                    <option value="teknologi">💻 Teknologi</option>
+                                    <option value="lingkungan">Lingkungan</option>
+                                    <option value="pendidikan">Pendidikan</option>
+                                    <option value="kesehatan">Kesehatan</option>
+                                    <option value="sosial">Sosial</option>
+                                    <option value="teknologi">Teknologi</option>
                                 </select>
                                 <span class="form-error" id="eventCategoryError"></span>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="eventDate">Tanggal Event *</label>
+                                <label for="eventDate">Tanggal Event </label>
                                 <input type="date" id="eventDate" required>
                                 <span class="form-error" id="eventDateError"></span>
                             </div>
                             <div class="form-group">
-                                <label for="eventLocation">Lokasi *</label>
+                                <label for="eventLocation">Lokasi   </label>
                                 <input type="text" id="eventLocation" placeholder="Kota / alamat lengkap" required>
                                 <span class="form-error" id="eventLocationError"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="eventDescription">Deskripsi Event *</label>
-                            <textarea id="eventDescription" rows="4" placeholder="Jelaskan detail event, tujuan, dan kebutuhan relawan..." required></textarea>
+                            <label for="eventDescription">Deskripsi Event</label>
+                            <textarea id="eventDescription" rows="4"
+                                placeholder="Jelaskan detail event, tujuan, dan kebutuhan relawan..."
+                                required></textarea>
                             <span class="form-error" id="eventDescriptionError"></span>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="eventOrganizerName">Nama Penyelenggara *</label>
-                                <input type="text" id="eventOrganizerName" placeholder="Nama organisasi/komunitas" required>
+                                <label for="eventOrganizerName">Nama Penyelenggara</label>
+                                <input type="text" id="eventOrganizerName" placeholder="Nama organisasi/komunitas"
+                                    required>
                                 <span class="form-error" id="eventOrganizerNameError"></span>
                             </div>
                             <div class="form-group">
-                                <label for="eventOrganizerEmail">Email Penyelenggara *</label>
-                                <input type="email" id="eventOrganizerEmail" placeholder="email@organisasi.com" required>
+                                <label for="eventOrganizerEmail">Email Penyelenggara</label>
+                                <input type="email" id="eventOrganizerEmail" placeholder="email@organisasi.com"
+                                    required>
                                 <span class="form-error" id="eventOrganizerEmailError"></span>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-full">Ajukan Event 📨</button>
+                        <button type="submit" class="btn btn-primary btn-full">Ajukan Event</button>
                     </form>
                     <div id="submitEventSuccess" class="success-message" style="display:none;">
-                        <div class="success-icon">✅</div>
+                        <div class="success-icon"></div>
                         <h3>Event Berhasil Diajukan!</h3>
                         <p>Tim kami akan meninjau proposal event kamu dalam 2-3 hari kerja.</p>
-                        <button class="btn btn-outline" onclick="document.getElementById('submitEventSuccess').style.display='none'; document.getElementById('submitEventForm').style.display='block'; document.getElementById('submitEventForm').reset();">Ajukan Lagi</button>
+                        <button class="btn btn-outline"
+                            onclick="document.getElementById('submitEventSuccess').style.display='none'; document.getElementById('submitEventForm').style.display='block'; document.getElementById('submitEventForm').reset();">Ajukan
+                            Lagi</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ═══════════ CONTACT ═══════════ -->
         <section id="contact" class="page">
             <div class="page-header">
                 <span class="badge">Hubungi Kami</span>
@@ -344,22 +335,21 @@
             </div>
 
             <div class="contact-grid">
-                <!-- Contact Form -->
                 <div class="glass-card contact-form-card">
-                    <h3>✉️ Kirim Pesan</h3>
+                    <h3>Kirim Pesan</h3>
                     <form id="contactForm" class="form">
                         <div class="form-group">
-                            <label for="contactName">Nama *</label>
+                            <label for="contactName">Nama</label>
                             <input type="text" id="contactName" placeholder="Nama kamu" required>
                             <span class="form-error" id="contactNameError"></span>
                         </div>
                         <div class="form-group">
-                            <label for="contactEmail">Email *</label>
+                            <label for="contactEmail">Email</label>
                             <input type="email" id="contactEmail" placeholder="email@contoh.com" required>
                             <span class="form-error" id="contactEmailError"></span>
                         </div>
                         <div class="form-group">
-                            <label for="contactSubject">Subjek *</label>
+                            <label for="contactSubject">Subjek</label>
                             <select id="contactSubject" required>
                                 <option value="">Pilih subjek</option>
                                 <option value="umum">Pertanyaan Umum</option>
@@ -371,82 +361,60 @@
                             <span class="form-error" id="contactSubjectError"></span>
                         </div>
                         <div class="form-group">
-                            <label for="contactMessage">Pesan *</label>
-                            <textarea id="contactMessage" rows="5" placeholder="Tulis pesan kamu di sini..." required></textarea>
+                            <label for="contactMessage">Pesan</label>
+                            <textarea id="contactMessage" rows="5" placeholder="Tulis pesan kamu di sini..."
+                                required></textarea>
                             <span class="form-error" id="contactMessageError"></span>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-full">Kirim Pesan 📩</button>
+                        <button type="submit" class="btn btn-primary btn-full">Kirim Pesan</button>
                     </form>
                     <div id="contactSuccess" class="success-message" style="display:none;">
-                        <div class="success-icon">📬</div>
+                        <div class="success-icon"></div>
                         <h3>Pesan Terkirim!</h3>
                         <p>Terima kasih! Tim kami akan membalas dalam 1×24 jam.</p>
-                        <button class="btn btn-outline" onclick="document.getElementById('contactSuccess').style.display='none'; document.getElementById('contactForm').style.display='block'; document.getElementById('contactForm').reset();">Kirim Lagi</button>
+                        <button class="btn btn-outline"
+                            onclick="document.getElementById('contactSuccess').style.display='none'; document.getElementById('contactForm').style.display='block'; document.getElementById('contactForm').reset();">Kirim
+                            Lagi</button>
                     </div>
                 </div>
 
-                <!-- Contact Info -->
                 <div class="contact-info">
                     <div class="glass-card contact-info-card">
-                        <h3>📍 Info Kontak</h3>
+                        <h3>Info Kontak</h3>
                         <div class="contact-item">
-                            <span class="contact-item-icon">📧</span>
+                            <span class="contact-item-icon"></span>
                             <div>
                                 <strong>Email</strong>
                                 <p>hello@evene.id</p>
                             </div>
                         </div>
                         <div class="contact-item">
-                            <span class="contact-item-icon">📱</span>
+                            <span class="contact-item-icon"></span>
                             <div>
                                 <strong>WhatsApp</strong>
                                 <p>+62 812-3456-7890</p>
                             </div>
                         </div>
-                        <div class="contact-item">
-                            <span class="contact-item-icon">🏢</span>
-                            <div>
-                                <strong>Kantor</strong>
-                                <p>Jl. Inovasi No. 42, Jakarta Selatan</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <span class="contact-item-icon">🕐</span>
-                            <div>
-                                <strong>Jam Operasional</strong>
-                                <p>Senin – Jumat, 09.00 – 17.00 WIB</p>
-                            </div>
-                        </div>
                     </div>
 
-                    <!-- Social Media -->
                     <div class="glass-card contact-info-card">
-                        <h3>🔗 Ikuti Kami</h3>
+                        <h3>Ikuti Kami</h3>
                         <div class="social-links">
-                            <a href="#" class="social-link" title="Instagram">📸 Instagram</a>
-                            <a href="#" class="social-link" title="Twitter">🐦 Twitter</a>
-                            <a href="#" class="social-link" title="LinkedIn">💼 LinkedIn</a>
-                            <a href="#" class="social-link" title="YouTube">🎬 YouTube</a>
+                            <a href="#" class="social-link" title="Instagram">Instagram</a>
+                            <a href="#" class="social-link" title="Twitter">Twitter</a>
+                            <a href="#" class="social-link" title="LinkedIn">LinkedIn</a>
+                            <a href="#" class="social-link" title="YouTube">YouTube</a>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- FAQ -->
-            <div class="section-header" style="margin-top: 4rem;">
-                <h2>Pertanyaan <span class="gradient-text">Umum (FAQ)</span></h2>
-            </div>
-            <div class="faq-list" id="faqList">
-                <!-- Rendered by JS -->
-            </div>
         </section>
     </main>
 
-    <!-- ═══════════ FOOTER ═══════════ -->
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
-                <span class="logo-icon">⚡</span>
+                <span class="logo-icon"></span>
                 <span class="logo-text">Evene</span>
                 <p>Platform event & relawan komunitas Indonesia.</p>
             </div>
@@ -472,15 +440,15 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 Evene. Dibuat dengan ❤️ untuk komunitas Indonesia.</p>
+            <p>© 2026 Evene. Dibuat untuk komunitas Indonesia.</p>
         </div>
     </footer>
 
-    <!-- Toast Notification -->
     <div id="toast" class="toast">
         <span id="toastMessage"></span>
     </div>
 
     <script src="app.js"></script>
 </body>
+
 </html>
