@@ -904,11 +904,16 @@ img {
 /* Team Grid */
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
+    justify-items: center;
+    max-width: 720px;
+    margin: 0 auto;
 }
 
 .team-card {
+    width: 100%;
+    max-width: 280px;
     padding: 2rem 1.5rem;
     text-align: center;
     transition: var(--transition);
