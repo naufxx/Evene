@@ -313,9 +313,6 @@ function openEventDetail(eventId) {
             <button class="btn btn-outline" onclick="addToCalendar(${event.id})">
                 Tambah ke Kalender
             </button>
-            <button class="btn btn-glass" onclick="shareToWhatsApp(${event.id})">
-                Share WhatsApp
-            </button>
         </div>
     `;
 
