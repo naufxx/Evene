@@ -13,7 +13,7 @@ const EVENTS_DATA = [
         requirements: ["Usia minimal 16 tahun", "Membawa sarung tangan sendiri (opsional)", "Menggunakan pakaian nyaman & sepatu tertutup", "Siap beraktivitas di bawah terik matahari"],
         volunteers: 23,
         maxVolunteers: 50,
-        icon: "",
+        icon: "https://i.pinimg.com/736x/d6/99/d3/d699d3014ef4b3b155e385a052d01ed6.jpg",
         gradient: "linear-gradient(135deg, #6c5ce7, #00cec9)"
     },
     {
@@ -30,7 +30,7 @@ const EVENTS_DATA = [
         requirements: ["Minimal mahasiswa semester 3", "Pengalaman mengajar (diutamakan)", "Sabar dan menyukai anak-anak", "Membawa alat tulis dan materi sendiri"],
         volunteers: 15,
         maxVolunteers: 30,
-        icon: "",
+        icon: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80",
         gradient: "linear-gradient(135deg, #e17055, #fdcb6e)"
     },
     {
@@ -47,7 +47,7 @@ const EVENTS_DATA = [
         requirements: ["Usia 17-60 tahun", "Berat badan minimal 45 kg", "Tidak sedang minum obat tertentu", "Tidur cukup minimal 6 jam sebelum donor"],
         volunteers: 45,
         maxVolunteers: 100,
-        icon: "",
+        icon: "https://i.pinimg.com/736x/e0/a7/47/e0a747510830c93d23dac9a47aa0390c.jpg",
         gradient: "linear-gradient(135deg, #e17055, #e056a0)"
     }
 ];
@@ -125,15 +125,19 @@ function renderEventCards(events) {
         const month = MONTHS_ID[d.getMonth()];
         const pct = Math.round((event.volunteers / event.maxVolunteers) * 100);
 
+        // Cek jika icon adalah URL gambar
+        const isImageUrl = event.icon && (event.icon.startsWith('http') || event.icon.startsWith('img/http') || event.icon.includes('/') || event.icon.includes('.'));
+        const imageUrl = isImageUrl ? (event.icon.startsWith('img/') ? event.icon.substring(4) : event.icon) : '';
+
         return `
             <div class="event-card" style="animation-delay: ${i * 0.1}s" onclick="openEventDetail(${event.id})">
-                <div class="event-card-image" style="background: ${event.gradient}">
+                <div class="event-card-image" style="background: ${isImageUrl ? `url('${imageUrl}') center / cover no-repeat` : event.gradient}">
                     <span class="event-card-category">${event.categoryLabel}</span>
                     <div class="event-card-date-badge">
                         <span class="day">${day}</span>
                         <span class="month">${month}</span>
                     </div>
-                    <span style="font-size: 3rem; z-index: 1;">${event.icon}</span>
+                    ${!isImageUrl && event.icon ? `<span style="font-size: 3rem; z-index: 1;">${event.icon}</span>` : ''}
                 </div>
                 <div class="event-card-body">
                     <h3>${event.title}</h3>
@@ -254,8 +258,11 @@ function openEventDetail(eventId) {
     const modal = document.getElementById('eventModal');
     const content = document.getElementById('modalContent');
 
+    const isImageUrl = event.icon && (event.icon.startsWith('http') || event.icon.startsWith('img/http') || event.icon.includes('/') || event.icon.includes('.'));
+    const imageUrl = isImageUrl ? (event.icon.startsWith('img/') ? event.icon.substring(4) : event.icon) : '';
+
     content.innerHTML = `
-        <div class="modal-event-icon">${event.icon}</div>
+        ${isImageUrl ? `<div class="modal-event-image-container" style="text-align:center; margin-bottom: 1.5rem;"><img src="${imageUrl}" alt="${event.title}" style="max-height: 250px; width: 100%; object-fit: cover; border-radius: var(--radius-md);" /></div>` : `<div class="modal-event-icon">${event.icon}</div>`}
         <h2 class="modal-event-title">${event.title}</h2>
         <div class="modal-event-category"><span class="badge">${event.categoryLabel}</span></div>
         <p class="modal-event-desc">${event.description}</p>
