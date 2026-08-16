@@ -681,7 +681,6 @@ img {
 
 .event-card-image {
     height: 180px;
-    background: var(--accent-gradient);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -711,6 +710,7 @@ img {
     background: rgba(10, 14, 26, 0.7);
     backdrop-filter: blur(8px);
     z-index: 2;
+    color: #ffffff;
 }
 
 .event-card-date-badge {
@@ -723,6 +723,7 @@ img {
     padding: 0.35rem 0.6rem;
     text-align: center;
     z-index: 2;
+    color: #ffffff;
 }
 
 .event-card-date-badge .day {
@@ -730,12 +731,13 @@ img {
     font-size: 1.1rem;
     font-weight: 800;
     line-height: 1;
+    color: #ffffff;
 }
 
 .event-card-date-badge .month {
     display: block;
     font-size: 0.65rem;
-    color: var(--accent-secondary);
+    color: #ffffff;
     text-transform: uppercase;
     font-weight: 600;
 }
